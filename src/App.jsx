@@ -1,16 +1,18 @@
+// App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LoginPage from './LoginPage';
+import SignupPage from './SignupPage';
 
-
-function App() {
-
-
+const App = () => {
   return (
-    <>
-      <Div>
+    <Router>
+      <Routes>
+        <Route path='/' element={<LoginPage />} />
+        <Route path='/signup' element={<SignupPage />} />
+      </Routes>
+    </Router>
+  );
+};
 
-        My plan is ongoing
-      </Div>
-    </>
-  )
-}
-
-export default App
+export default App;
