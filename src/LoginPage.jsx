@@ -1,25 +1,58 @@
-// components/LoginPage.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
+// LoginPage.jsx
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 const LoginPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = e => {
+    e.preventDefault();
+
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (!user) {
+      toast.error('No account found! Please sign up.');
+      return;
+    }
+
+    if (email === user.email && password === user.password) {
+      toast.success('Login successful!');
+      // Wait 1 second so the toast is visible, then navigate
+      setTimeout(() => {
+        navigate('/home');
+      }, 1000);
+    } else {
+      toast.error('Invalid email or password');
+    }
+  };
+
   return (
     <div className='min-h-screen flex flex-col justify-between items-center bg-gray-100'>
+      {/* Toast container */}
+      <Toaster position='top-right' />
+
       {/* Top wave */}
       <div className='w-full h-32 rounded-b-[50%_30%] bg-gradient-to-b from-[rgba(62,150,238,0.8918)] to-[rgba(39,99,159,0.98)]'></div>
 
       {/* Login box */}
       <div className='bg-white shadow-lg rounded-xl p-8 w-96 max-w-[90%] text-center'>
         <h1 className='text-3xl font-bold text-blue-600 mb-6'>Planeer</h1>
-        <form className='space-y-4'>
+        <form className='space-y-4' onSubmit={handleLogin}>
           <input
             type='email'
             placeholder='Email'
+            value={email}
+            onChange={e => setEmail(e.target.value)}
             className='w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E6AA7]'
           />
           <input
             type='password'
             placeholder='Password'
+            value={password}
+            onChange={e => setPassword(e.target.value)}
             className='w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E6AA7]'
           />
           <button
