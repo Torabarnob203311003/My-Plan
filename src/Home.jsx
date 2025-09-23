@@ -18,6 +18,15 @@ const Home = () => {
     retirementAccount: '',
     assets: '',
     debt: '',
+    vehicleOwnership: '',
+    vehicleMakeModel: '',
+    carInsurance: '',
+    atvBoatMotorcycle: '',
+    homeOwnership: '',
+    homeownerInsurance: '',
+    socialMedia: '',
+    website: '',
+    streamingService: '',
   });
 
   const handleChange = e => {
@@ -25,7 +34,7 @@ const Home = () => {
   };
 
   const nextStep = () => {
-    setStep(prev => Math.min(prev + 1, 3)); // Max step is now 3
+    setStep(prev => Math.min(prev + 1, 5)); // Max step is now 5
   };
 
   const prevStep = () => {
@@ -36,7 +45,7 @@ const Home = () => {
     <div className='min-h-screen flex flex-col items-center justify-center p-6 bg-gray-100'>
       {/* Progress Bar */}
       <div className='w-full max-w-2xl mb-6 flex justify-between'>
-        {[1, 2, 3].map((item, index) => (
+        {[1, 2, 3, 4, 5].map((item, index) => (
           <div
             key={index}
             className={`flex-1 h-2 mx-1 rounded-full ${
@@ -52,6 +61,7 @@ const Home = () => {
           <>
             <h2 className='text-xl font-semibold mb-6'>Create your profile</h2>
             <div className='space-y-4'>
+              <p>First name</p>
               <input
                 type='text'
                 name='firstName'
@@ -60,6 +70,7 @@ const Home = () => {
                 onChange={handleChange}
                 className='w-full px-4 py-3 border rounded-lg'
               />
+              <p>Last name</p>
               <input
                 type='text'
                 name='lastName'
@@ -68,6 +79,7 @@ const Home = () => {
                 onChange={handleChange}
                 className='w-full px-4 py-3 border rounded-lg'
               />
+              <p>DOB</p>
               <input
                 type='date'
                 name='dob'
@@ -76,6 +88,7 @@ const Home = () => {
                 onChange={handleChange}
                 className='w-full px-4 py-3 border rounded-lg'
               />
+              <p>City</p>
               <input
                 type='text'
                 name='city'
@@ -84,6 +97,7 @@ const Home = () => {
                 onChange={handleChange}
                 className='w-full px-4 py-3 border rounded-lg'
               />
+              <p>State</p>
               <input
                 type='text'
                 name='state'
@@ -92,6 +106,7 @@ const Home = () => {
                 onChange={handleChange}
                 className='w-full px-4 py-3 border rounded-lg'
               />
+              <p>Company</p>
               <input
                 type='text'
                 name='company'
@@ -100,6 +115,7 @@ const Home = () => {
                 onChange={handleChange}
                 className='w-full px-4 py-3 border rounded-lg'
               />
+              <p>Year started</p>
               <input
                 type='text'
                 name='yearStarted'
@@ -122,77 +138,42 @@ const Home = () => {
           <>
             <h2 className='text-xl font-semibold mb-6'>Medical Information</h2>
             <div className='space-y-4'>
-              <div>
-                <label
-                  htmlFor='healthInsurance'
-                  className='block text-sm font-medium text-gray-700'
-                >
-                  Have Health Insurance?
-                </label>
-                <input
-                  id='healthInsurance'
-                  type='text'
-                  name='healthInsurance'
-                  placeholder='ex: Aetna'
-                  value={formData.healthInsurance}
-                  onChange={handleChange}
-                  className='mt-1 w-full px-4 py-3 border rounded-lg'
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor='supplementalInsurance'
-                  className='block text-sm font-medium text-gray-700'
-                >
-                  Have Supplemental Insurance?
-                </label>
-                <input
-                  id='supplementalInsurance'
-                  type='text'
-                  name='supplementalInsurance'
-                  placeholder='ex: Medicaid'
-                  value={formData.supplementalInsurance}
-                  onChange={handleChange}
-                  className='mt-1 w-full px-4 py-3 border rounded-lg'
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor='medications'
-                  className='block text-sm font-medium text-gray-700'
-                >
-                  Taking any Medications?
-                </label>
-                <input
-                  id='medications'
-                  type='text'
-                  name='medications'
-                  placeholder='Any...'
-                  value={formData.medications}
-                  onChange={handleChange}
-                  className='mt-1 w-full px-4 py-3 border rounded-lg'
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor='ailments'
-                  className='block text-sm font-medium text-gray-700'
-                >
-                  Have any known Ailments?
-                </label>
-                <input
-                  id='ailments'
-                  type='text'
-                  name='ailments'
-                  placeholder='Any...'
-                  value={formData.ailments}
-                  onChange={handleChange}
-                  className='mt-1 w-full px-4 py-3 border rounded-lg'
-                />
-              </div>
+              <p>Health Insurance</p>
+              <input
+                type='text'
+                name='healthInsurance'
+                placeholder='Health Insurance'
+                value={formData.healthInsurance}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
+              <p>Supplemental Insurance</p>
+              <input
+                type='text'
+                name='supplementalInsurance'
+                placeholder='Supplemental Insurance'
+                value={formData.supplementalInsurance}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
+              <p>Medications</p>
+              <input
+                type='text'
+                name='medications'
+                placeholder='Medications'
+                value={formData.medications}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
+              <p>Ailments</p>
+              <input
+                type='text'
+                name='ailments'
+                placeholder='Ailments'
+                value={formData.ailments}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
               <div className='flex justify-between mt-6'>
                 <button
                   onClick={prevStep}
@@ -217,78 +198,169 @@ const Home = () => {
               Financial Information
             </h2>
             <div className='space-y-4'>
-              <div>
-                <label
-                  htmlFor='bankAccount'
-                  className='block text-sm font-medium text-gray-700'
+              <p>Bank Account</p>
+              <input
+                type='text'
+                name='bankAccount'
+                placeholder='Bank Account'
+                value={formData.bankAccount}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
+              <p>Retirement Account</p>
+              <input
+                type='text'
+                name='retirementAccount'
+                placeholder='Retirement Account'
+                value={formData.retirementAccount}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
+              <p>Assets</p>
+              <input
+                type='text'
+                name='assets'
+                placeholder='Assets'
+                value={formData.assets}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
+              <p>Debt</p>
+              <input
+                type='text'
+                name='debt'
+                placeholder='Debt'
+                value={formData.debt}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
+              <div className='flex justify-between mt-6'>
+                <button
+                  onClick={prevStep}
+                  className='w-1/2 mr-2 bg-gray-400 text-white py-3 rounded-lg hover:opacity-90 transition'
                 >
-                  Have a Bank account?
-                </label>
-                <input
-                  id='bankAccount'
-                  type='text'
-                  name='bankAccount'
-                  placeholder='ex: Capital One'
-                  value={formData.bankAccount}
-                  onChange={handleChange}
-                  className='mt-1 w-full px-4 py-3 border rounded-lg'
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor='retirementAccount'
-                  className='block text-sm font-medium text-gray-700'
+                  Back
+                </button>
+                <button
+                  onClick={nextStep}
+                  className='w-1/2 ml-2 bg-blue-600 text-white py-3 rounded-lg hover:opacity-90 transition'
                 >
-                  Have a Retirement account?
-                </label>
-                <input
-                  id='retirementAccount'
-                  type='text'
-                  name='retirementAccount'
-                  placeholder='ex: 401K plan'
-                  value={formData.retirementAccount}
-                  onChange={handleChange}
-                  className='mt-1 w-full px-4 py-3 border rounded-lg'
-                />
+                  Next
+                </button>
               </div>
+            </div>
+          </>
+        )}
 
-              <div>
-                <label
-                  htmlFor='assets'
-                  className='block text-sm font-medium text-gray-700'
+        {step === 4 && (
+          <>
+            <h2 className='text-xl font-semibold mb-6'>
+              Home & Auto Information
+            </h2>
+            <div className='space-y-4'>
+              <p>Do you Own or Lease your vehicle?</p>
+              <input
+                type='text'
+                name='vehicleOwnership'
+                placeholder='Do you Own or Lease your vehicle?'
+                value={formData.vehicleOwnership}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
+              <p>What Make & Model?</p>
+              <input
+                type='text'
+                name='vehicleMakeModel'
+                placeholder='What Make & Model?'
+                value={formData.vehicleMakeModel}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
+              <p>Car Insurance?</p>
+              <input
+                type='text'
+                name='carInsurance'
+                placeholder='Car Insurance?'
+                value={formData.carInsurance}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
+              <p>Have an ATV/Boat/Motorcycle?</p>
+              <input
+                type='text'
+                name='atvBoatMotorcycle'
+                placeholder='Have an ATV/Boat/Motorcycle?'
+                value={formData.atvBoatMotorcycle}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
+              <p>Do you Own or Rent your home?</p>
+              <input
+                type='text'
+                name='homeOwnership'
+                placeholder='Do you Own or Rent your home?'
+                value={formData.homeOwnership}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
+              <p>Have Homeowner/Renter Insurance?</p>
+              <input
+                type='text'
+                name='homeownerInsurance'
+                placeholder='Have Homeowner/Renter Insurance?'
+                value={formData.homeownerInsurance}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
+              <div className='flex justify-between mt-6'>
+                <button
+                  onClick={prevStep}
+                  className='w-1/2 mr-2 bg-gray-400 text-white py-3 rounded-lg hover:opacity-90 transition'
                 >
-                  What are your current Assets?
-                </label>
-                <input
-                  id='assets'
-                  type='text'
-                  name='assets'
-                  placeholder='ex: Own a business'
-                  value={formData.assets}
-                  onChange={handleChange}
-                  className='mt-1 w-full px-4 py-3 border rounded-lg'
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor='debt'
-                  className='block text-sm font-medium text-gray-700'
+                  Back
+                </button>
+                <button
+                  onClick={nextStep}
+                  className='w-1/2 ml-2 bg-blue-600 text-white py-3 rounded-lg hover:opacity-90 transition'
                 >
-                  Have any Debt?
-                </label>
-                <input
-                  id='debt'
-                  type='text'
-                  name='debt'
-                  placeholder='ex: <$5,000'
-                  value={formData.debt}
-                  onChange={handleChange}
-                  className='mt-1 w-full px-4 py-3 border rounded-lg'
-                />
+                  Next
+                </button>
               </div>
+            </div>
+          </>
+        )}
 
+        {step === 5 && (
+          <>
+            <h2 className='text-xl font-semibold mb-6'>Social Information</h2>
+            <div className='space-y-4'>
+              <p>Have Social media?</p>
+              <input
+                type='text'
+                name='socialMedia'
+                placeholder='Social media?'
+                value={formData.socialMedia}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
+              <p>Have a Website?</p>
+              <input
+                type='text'
+                name='website'
+                placeholder='Website?'
+                value={formData.website}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
+              <p>Subscribed to a Streaming service?</p>
+              <input
+                type='text'
+                name='streamingService'
+                placeholder='Streaming service?'
+                value={formData.streamingService}
+                onChange={handleChange}
+                className='w-full px-4 py-3 border rounded-lg'
+              />
               <div className='flex justify-between mt-6'>
                 <button
                   onClick={prevStep}
@@ -300,7 +372,7 @@ const Home = () => {
                   onClick={() => alert(JSON.stringify(formData, null, 2))}
                   className='w-1/2 ml-2 bg-blue-600 text-white py-3 rounded-lg hover:opacity-90 transition'
                 >
-                  Submit
+                  Save
                 </button>
               </div>
             </div>
