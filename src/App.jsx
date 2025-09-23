@@ -1,10 +1,12 @@
 // App.jsx
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Form } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import LoginPage from './LoginPage';
 import SignupPage from './SignupPage';
-import Home from './Home';
+
+import Forms from './Forms';
+import Layout from './Layout/Layout';
 
 const App = () => {
   return (
@@ -13,7 +15,8 @@ const App = () => {
       <Routes>
         <Route path='/' element={<LoginPage />} />
         <Route path='/signup' element={<SignupPage />} />
-        <Route path='/home' element={<Home />} />
+        <Route path='/signup/form' element={<Forms />} />
+        <Route path='/Home' element={<Layout />} />
       </Routes>
     </Router>
   );

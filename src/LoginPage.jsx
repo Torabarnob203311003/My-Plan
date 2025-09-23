@@ -22,7 +22,7 @@ const LoginPage = () => {
       toast.success('Login successful!');
       // Wait 1 second so the toast is visible, then navigate
       setTimeout(() => {
-        navigate('/home');
+        navigate('/signup/form');
       }, 1000);
     } else {
       toast.error('Invalid email or password');

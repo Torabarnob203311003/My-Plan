@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Home = () => {
+const Forms = () => {
   const [step, setStep] = useState(1);
+  const navigate = useNavigate(); // Initialize useNavigate hook
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -39,6 +42,11 @@ const Home = () => {
 
   const prevStep = () => {
     setStep(prev => Math.max(prev - 1, 1));
+  };
+
+  const handleSave = () => {
+    alert(JSON.stringify(formData, null, 2)); // Show form data in an alert
+    navigate('/home'); // Navigate to /home after saving
   };
 
   return (
@@ -369,7 +377,7 @@ const Home = () => {
                   Back
                 </button>
                 <button
-                  onClick={() => alert(JSON.stringify(formData, null, 2))}
+                  onClick={handleSave}
                   className='w-1/2 ml-2 bg-blue-600 text-white py-3 rounded-lg hover:opacity-90 transition'
                 >
                   Save
@@ -383,4 +391,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Forms;
