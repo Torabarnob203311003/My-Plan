@@ -32,26 +32,25 @@ const Home = () => {
     setStep(prev => Math.max(prev - 1, 1));
   };
 
-  // Calculate progress percentage (3 steps total)
-  const progress = (step / 3) * 100;
-
   return (
-    <div className='min-h-screen flex flex-col items-center justify-start p-6 bg-gray-100'>
+    <div className='min-h-screen flex flex-col items-center justify-center p-6 bg-gray-100'>
       {/* Progress Bar */}
-      <div className='w-full max-w-md mb-6'>
-        <div className='w-full bg-gray-300 rounded-full h-2'>
+      <div className='w-full max-w-2xl mb-6 flex justify-between'>
+        {[1, 2, 3].map((item, index) => (
           <div
-            className='bg-blue-600 h-2 rounded-full transition-all duration-300'
-            style={{ width: `${progress}%` }}
+            key={index}
+            className={`flex-1 h-2 mx-1 rounded-full ${
+              step >= item ? 'bg-blue-600' : 'bg-gray-300'
+            }`}
           ></div>
-        </div>
+        ))}
       </div>
 
       {/* Form */}
-      <div className='w-full space-y-12 max-w-md bg-white p-6 rounded-lg shadow-md'>
+      <div className='w-full max-w-2xl bg-white p-8 rounded-lg shadow-lg flex flex-col justify-between h-full'>
         {step === 1 && (
           <>
-            <h2 className='text-lg font-semibold mb-4'>Create your profile</h2>
+            <h2 className='text-xl font-semibold mb-6'>Create your profile</h2>
             <div className='space-y-4'>
               <input
                 type='text'
@@ -59,7 +58,7 @@ const Home = () => {
                 placeholder='First name'
                 value={formData.firstName}
                 onChange={handleChange}
-                className='w-full px-4 py-2 border rounded-lg'
+                className='w-full px-4 py-3 border rounded-lg'
               />
               <input
                 type='text'
@@ -67,7 +66,7 @@ const Home = () => {
                 placeholder='Last name'
                 value={formData.lastName}
                 onChange={handleChange}
-                className='w-full px-4 py-2 border rounded-lg'
+                className='w-full px-4 py-3 border rounded-lg'
               />
               <input
                 type='date'
@@ -75,7 +74,7 @@ const Home = () => {
                 placeholder='DOB'
                 value={formData.dob}
                 onChange={handleChange}
-                className='w-full px-4 py-2 border rounded-lg'
+                className='w-full px-4 py-3 border rounded-lg'
               />
               <input
                 type='text'
@@ -83,7 +82,7 @@ const Home = () => {
                 placeholder='City'
                 value={formData.city}
                 onChange={handleChange}
-                className='w-full px-4 py-2 border rounded-lg'
+                className='w-full px-4 py-3 border rounded-lg'
               />
               <input
                 type='text'
@@ -91,7 +90,7 @@ const Home = () => {
                 placeholder='State'
                 value={formData.state}
                 onChange={handleChange}
-                className='w-full px-4 py-2 border rounded-lg'
+                className='w-full px-4 py-3 border rounded-lg'
               />
               <input
                 type='text'
@@ -99,7 +98,7 @@ const Home = () => {
                 placeholder='Company'
                 value={formData.company}
                 onChange={handleChange}
-                className='w-full px-4 py-2 border rounded-lg'
+                className='w-full px-4 py-3 border rounded-lg'
               />
               <input
                 type='text'
@@ -107,11 +106,11 @@ const Home = () => {
                 placeholder='Year started'
                 value={formData.yearStarted}
                 onChange={handleChange}
-                className='w-full px-4 py-2 border rounded-lg'
+                className='w-full px-4 py-3 border rounded-lg'
               />
               <button
                 onClick={nextStep}
-                className='mt-4 w-full bg-blue-600 text-white py-2 rounded-lg hover:opacity-90 transition'
+                className='mt-6 w-full bg-blue-600 text-white py-3 rounded-lg hover:opacity-90 transition'
               >
                 Next
               </button>
@@ -121,7 +120,7 @@ const Home = () => {
 
         {step === 2 && (
           <>
-            <h2 className='text-lg font-semibold mb-4'>Medical Information</h2>
+            <h2 className='text-xl font-semibold mb-6'>Medical Information</h2>
             <div className='space-y-4'>
               <div>
                 <label
@@ -137,7 +136,7 @@ const Home = () => {
                   placeholder='ex: Aetna'
                   value={formData.healthInsurance}
                   onChange={handleChange}
-                  className='mt-1 w-full px-4 py-2 border rounded-lg'
+                  className='mt-1 w-full px-4 py-3 border rounded-lg'
                 />
               </div>
 
@@ -155,7 +154,7 @@ const Home = () => {
                   placeholder='ex: Medicaid'
                   value={formData.supplementalInsurance}
                   onChange={handleChange}
-                  className='mt-1 w-full px-4 py-2 border rounded-lg'
+                  className='mt-1 w-full px-4 py-3 border rounded-lg'
                 />
               </div>
 
@@ -173,7 +172,7 @@ const Home = () => {
                   placeholder='Any...'
                   value={formData.medications}
                   onChange={handleChange}
-                  className='mt-1 w-full px-4 py-2 border rounded-lg'
+                  className='mt-1 w-full px-4 py-3 border rounded-lg'
                 />
               </div>
 
@@ -191,19 +190,19 @@ const Home = () => {
                   placeholder='Any...'
                   value={formData.ailments}
                   onChange={handleChange}
-                  className='mt-1 w-full px-4 py-2 border rounded-lg'
+                  className='mt-1 w-full px-4 py-3 border rounded-lg'
                 />
               </div>
-              <div className='flex justify-between mt-4'>
+              <div className='flex justify-between mt-6'>
                 <button
                   onClick={prevStep}
-                  className='w-1/2 mr-2 bg-gray-400 text-white py-2 rounded-lg hover:opacity-90 transition'
+                  className='w-1/2 mr-2 bg-gray-400 text-white py-3 rounded-lg hover:opacity-90 transition'
                 >
                   Back
                 </button>
                 <button
                   onClick={nextStep}
-                  className='w-1/2 ml-2 bg-blue-600 text-white py-2 rounded-lg hover:opacity-90 transition'
+                  className='w-1/2 ml-2 bg-blue-600 text-white py-3 rounded-lg hover:opacity-90 transition'
                 >
                   Next
                 </button>
@@ -214,7 +213,7 @@ const Home = () => {
 
         {step === 3 && (
           <>
-            <h2 className='text-lg font-semibold mb-4'>
+            <h2 className='text-xl font-semibold mb-6'>
               Financial Information
             </h2>
             <div className='space-y-4'>
@@ -232,7 +231,7 @@ const Home = () => {
                   placeholder='ex: Capital One'
                   value={formData.bankAccount}
                   onChange={handleChange}
-                  className='mt-1 w-full px-4 py-2 border rounded-lg'
+                  className='mt-1 w-full px-4 py-3 border rounded-lg'
                 />
               </div>
 
@@ -250,7 +249,7 @@ const Home = () => {
                   placeholder='ex: 401K plan'
                   value={formData.retirementAccount}
                   onChange={handleChange}
-                  className='mt-1 w-full px-4 py-2 border rounded-lg'
+                  className='mt-1 w-full px-4 py-3 border rounded-lg'
                 />
               </div>
 
@@ -268,7 +267,7 @@ const Home = () => {
                   placeholder='ex: Own a business'
                   value={formData.assets}
                   onChange={handleChange}
-                  className='mt-1 w-full px-4 py-2 border rounded-lg'
+                  className='mt-1 w-full px-4 py-3 border rounded-lg'
                 />
               </div>
 
@@ -286,20 +285,20 @@ const Home = () => {
                   placeholder='ex: <$5,000'
                   value={formData.debt}
                   onChange={handleChange}
-                  className='mt-1 w-full px-4 py-2 border rounded-lg'
+                  className='mt-1 w-full px-4 py-3 border rounded-lg'
                 />
               </div>
 
-              <div className='flex justify-between mt-4'>
+              <div className='flex justify-between mt-6'>
                 <button
                   onClick={prevStep}
-                  className='w-1/2 mr-2 bg-gray-400 text-white py-2 rounded-lg hover:opacity-90 transition'
+                  className='w-1/2 mr-2 bg-gray-400 text-white py-3 rounded-lg hover:opacity-90 transition'
                 >
                   Back
                 </button>
                 <button
                   onClick={() => alert(JSON.stringify(formData, null, 2))}
-                  className='w-1/2 ml-2 bg-blue-600 text-white py-2 rounded-lg hover:opacity-90 transition'
+                  className='w-1/2 ml-2 bg-blue-600 text-white py-3 rounded-lg hover:opacity-90 transition'
                 >
                   Submit
                 </button>
