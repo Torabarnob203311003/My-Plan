@@ -9,7 +9,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className='bg-blue-600 text-white p-4'>
+    <nav style={{ background: '#4B98D2' }} className='text-white p-4'>
       <div className='container mx-auto flex justify-between items-center'>
         {/* Logo */}
         <h1 className='text-lg font-bold'>My Plan</h1>
@@ -80,7 +80,7 @@ const Navbar = () => {
 
       {/* Dropdown menu for smaller screens */}
       {isMenuOpen && (
-        <div className='md:hidden bg-blue-600 text-white p-4'>
+        <div className='md:hidden' style={{ background: '#4B98D2' }}>
           <Link to='/' className='block py-2 hover:underline'>
             Home
           </Link>
