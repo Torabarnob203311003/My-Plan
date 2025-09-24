@@ -33,7 +33,7 @@ const Cards = () => {
       <div className="max-w-8xl text-center mx-auto">
         <h1 className="text-2xl font-semibold mb-1 ">Planner Summary</h1>
         <p className="text-gray-600 mb-6">Secure your family in case of emergency</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4  ">
           {cards.map((card, idx) => (
             <div
               key={idx}
