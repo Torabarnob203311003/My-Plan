@@ -218,6 +218,9 @@ const Navbar = () => {
               <a href='/reviews' className='hover:underline text-sm md:text-base lg:text-lg transition-colors duration-200'>
                 Reviews
               </a>
+              <a href='/connections' className='hover:underline text-sm md:text-base lg:text-lg transition-colors duration-200'>
+                Connections
+              </a>
             </div>
           </div>
 
@@ -373,6 +376,9 @@ const Navbar = () => {
               </a>
               <a href='/reviews' className='block py-2 hover:underline text-sm sm:text-base transition-colors duration-200' onClick={() => setIsMenuOpen(false)}>
                 Reviews
+              </a>
+              <a href='/connections' className='block py-2 hover:underline text-sm sm:text-base transition-colors duration-200' onClick={() => setIsMenuOpen(false)}>
+                Connections
               </a>
               
               {/* Mobile buttons in hamburger menu */}
