@@ -13,7 +13,8 @@ const App = () => {
     <Router>
       <Toaster position='top-right' /> {/* Add Toaster here */}
       <Routes>
-        <Route path='/' element={<LoginPage />} />
+        <Route path='/' element={<Layout/>} />
+         <Route path='/login' element={<LoginPage/>} />
         <Route path='/signup' element={<SignupPage />} />
         <Route path='/signup/form' element={<Forms />} />
         <Route path='/Home' element={<Layout />} />
