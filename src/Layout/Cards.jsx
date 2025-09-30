@@ -29,7 +29,7 @@ const cards = [
 
 const Cards = () => {
   return (
-    <div className=" min-h-screen p-4">
+    <div className=" p-4">
       <div className="max-w-8xl text-center mx-auto">
         <h1 className="text-2xl font-semibold mb-1 ">Planner Summary</h1>
         <p className="text-gray-600 mb-6">Secure your family in case of emergency</p>
