@@ -1,25 +1,22 @@
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
-import Cards from './Cards';
-import Hero from './Hero';
 import Footer from './Footer';
-import FAQ from './FAQ.JSX';
-import AboutUs from './AboutUs';
+import FAQ from './FAQ';
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
     <div className='min-h-screen bg-gray-100 flex flex-col'>
+      {/* Navbar appears on all pages */}
       <Navbar />
-      <Hero/>
-      <div className='flex-grow p-6'>
-        <Cards />
-        {children}
-
+      
+      {/* Main content area - child routes render here */}
+      <div className='flex-grow'>
+        <Outlet /> {/* AboutUs, Home, Terms, etc. render here */}
       </div>
-
-      <FAQ/>
-      <AboutUs/>
-      <Footer/>
+<FAQ/>
+      {/* Footer appears on all pages */}
+      <Footer />
     </div>
   );
 };

@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   const footerLinks = [
     { name: 'Contact', href: '#contact' },
-    { name: 'FAQ', href: '#faq' },
+    // { name: 'FAQ', href: '#faq' },
     { name: 'News', href: '#news' },
     { name: 'Resources', href: '#resources' },
-    { name: 'About Us', href: '#about' },
+    // { name: 'About Us', href: '#about' },
     { name: 'Privacy', href: '#privacy' },
     { name: 'Legal', href: '#legal' },
-    { name: 'Terms of Use', href: '#terms' }
+    // { name: 'Terms of Use', href: '#terms' }
   ];
 
   const socialLinks = [
@@ -19,6 +20,35 @@ export default function Footer() {
     { icon: Instagram, href: '#instagram', label: 'Instagram' },
     { icon: Linkedin, href: '#linkedin', label: 'LinkedIn' }
   ];
+
+  // 🪄 Function to instantly scroll to the top of the page (instant scroll fast)
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant', // Ensures the scroll is instant
+    });
+  }, []);
+
+  // Function to handle link clicks, triggering scroll for internal links
+  const handleLinkClick = (isTermsOfUse = false) => {
+    // For 'Terms of Use', we navigate to a new route, then scroll to top.
+    // The scroll to top should generally be handled on the *destination* page component,
+    // but we can enforce it here before navigation (though a `useEffect` on the destination 
+    // component using `useLocation` is the React router best practice).
+    // For simplicity, we just call it on the click event.
+    if (isTermsOfUse) {
+      // In a multi-page app (using Link), the destination page should handle the scroll, 
+      // but this forces it on click before navigation starts.
+      scrollToTop();
+    } else {
+      // For hash links, we only need to call scroll to top if the link jumps to a 
+      // section far down the current page. If the href is a hash link, the browser
+      // will handle the section jump, but we can call scrollToTop to ensure
+      // the page is reset if needed before the jump.
+      scrollToTop(); 
+    }
+  };
 
   return (
     <footer className="w-full border-t border-blue-400" style={{ background: 'linear-gradient(180deg, rgba(62, 150, 238, 0.8918) -49.04%, rgba(39, 99, 159, 0.98) 43.54%)' }}>
@@ -42,6 +72,7 @@ export default function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
+                  onClick={scrollToTop} // Scroll to top when clicking any social link (optional)
                   className="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white hover:bg-white hover:text-blue-600 hover:border-white transition-all duration-200"
                 >
                   <social.icon className="w-4 h-4" />
@@ -52,16 +83,28 @@ export default function Footer() {
         </div>
 
         {/* Links Section */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-4 sm:gap-6">
-          {footerLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-white hover:text-orange-300 transition-colors duration-200 text-sm sm:text-base font-medium"
-            >
-              {link.name}
-            </a>
-          ))}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+          {footerLinks.map((link) =>
+            link.name === 'Terms of Use' ? (
+              <Link
+                key={link.name}
+                to="/terms"
+                onClick={() => handleLinkClick(true)} // Calls scrollToTop before navigating
+                className="text-white hover:text-orange-300 transition-colors duration-200 text-sm sm:text-base font-medium"
+              >
+                {link.name}
+              </Link>
+            ) : (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => handleLinkClick(false)} // Calls scrollToTop before jumping to hash
+                className="text-white hover:text-orange-300 transition-colors duration-200 text-sm sm:text-base font-medium"
+              >
+                {link.name}
+              </a>
+            )
+          )}
         </div>
 
         {/* Copyright Section */}

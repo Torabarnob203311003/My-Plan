@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 // Detail modal for each person
 const PersonDetailModal = ({ open, onClose, person }) => {
@@ -212,15 +213,15 @@ const Navbar = () => {
               <a href='/' className='hover:underline text-sm md:text-base lg:text-lg transition-colors duration-200'>
                 Home
               </a>
-              <a href='/about' className='hover:underline text-sm md:text-base lg:text-lg transition-colors duration-200'>
+              <Link to='/about' className='hover:underline text-sm md:text-base lg:text-lg transition-colors duration-200'>
                 About
-              </a>
+              </Link>
               <a href='/reviews' className='hover:underline text-sm md:text-base lg:text-lg transition-colors duration-200'>
                 Reviews
               </a>
-              <a href='/connections' className='hover:underline text-sm md:text-base lg:text-lg transition-colors duration-200'>
-                Connections
-              </a>
+              <Link to='/terms' className='hover:underline text-sm md:text-base lg:text-lg transition-colors duration-200'>
+                Terms
+              </Link>
             </div>
           </div>
 

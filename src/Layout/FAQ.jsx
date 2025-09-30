@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
 export default function FAQ() {
@@ -43,8 +43,24 @@ export default function FAQ() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  // 🪄 Scroll logic: Check the URL hash on component mount
+  useEffect(() => {
+    // Check if the current URL hash matches the FAQ section ID
+    if (window.location.hash === '#faq') {
+      const element = document.getElementById('faq');
+      if (element) {
+        // Use 'instant' behavior for fast scrolling
+        element.scrollIntoView({
+          behavior: 'instant',
+          block: 'start', // Scroll the top of the element to the top of the viewport
+        });
+      }
+    }
+  }, []); // Run only once on mount
+
   return (
-    <section className="w-full py-16 sm:py-20 lg:py-24" style={{ backgroundColor: '#4B98D2' }}>
+    // 💡 IMPORTANT: Add the 'id' matching the footer link's href="#faq"
+    <section id="faq" className="w-full py-16 sm:py-20 lg:py-24" style={{ backgroundColor: '#4B98D2' }}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16">
