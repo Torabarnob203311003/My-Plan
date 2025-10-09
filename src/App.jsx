@@ -24,7 +24,7 @@ const App = () => {
           
            /> {/* AboutUs at "/about" */}
 
-             <Route path='reviews' element={<Reviews />} /> {/* AboutUs at "/about" */}
+             <Route path='reviews' element={<Reviews />} /> AboutUs at "/about"
            
            <Route path='terms' element={<TermsOfUse />} /> {/* Inside the Layout parent route */}
         </Route>

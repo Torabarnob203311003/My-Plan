@@ -25,7 +25,7 @@ const Navbar = () => {
 
           {/* Desktop Navigation Links and Buttons */}
           <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
-           <div className='hidden md:flex items-center space-x-6 lg:space-x-8  md:me-48  lg:me-68'>
+           <div className='hidden md:flex items-center space-x-6 lg:space-x-8  md:me-28  lg:me-16'>
  <a href='#about' className='text-gray-700 hover:text-[#4A90E2] font-medium text-sm lg:text-base transition-colors duration-200'>
               About
             </a>
