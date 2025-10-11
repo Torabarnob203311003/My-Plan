@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,22 +20,22 @@ const Navbar = () => {
                   <path d="M 14 24 L 18 28 L 28 18" stroke="white" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <span className='text-2xl sm:text-3xl font-bold text-[#4A90E2]'>planeer</span>
+              <Link to = "/" className='text-2xl sm:text-3xl font-bold text-[#4A90E2]'>planeer</Link>
             </div>
           </div>
 
           {/* Desktop Navigation Links and Buttons */}
           <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
            <div className='hidden md:flex items-center space-x-6 lg:space-x-8  md:me-28  lg:me-16'>
- <a href='#about' className='text-gray-700 hover:text-[#4A90E2] font-medium text-sm lg:text-base transition-colors duration-200'>
+ <Link to ='about' className='text-gray-700 hover:text-[#4A90E2] font-medium text-sm lg:text-base transition-colors duration-200'>
               About
-            </a>
-            <a href='#reviews' className='text-gray-700 hover:text-[#4A90E2] font-medium text-sm lg:text-base transition-colors duration-200'>
+            </Link>
+            <Link to ='reviews' className='text-gray-700 hover:text-[#4A90E2] font-medium text-sm lg:text-base transition-colors duration-200'>
               Reviews
-            </a>
-            <a href='#plans' className='text-gray-700 hover:text-[#4A90E2] font-medium text-sm lg:text-base transition-colors duration-200'>
+            </Link>
+            <Link to='plans' className='text-gray-700 hover:text-[#4A90E2] font-medium text-sm lg:text-base transition-colors duration-200'>
               Plans
-            </a>
+            </Link>
 
            </div>
             <button className='px-5 lg:px-6 py-2 lg:py-2.5 rounded-md border-2 border-gray-300 text-gray-700 font-semibold hover:border-[#4A90E2] hover:text-[#4A90E2] transition text-sm lg:text-base'>

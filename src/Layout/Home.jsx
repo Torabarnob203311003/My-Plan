@@ -5,6 +5,7 @@ import FAQ from './FAQ';
 import Reviews from './Reviews';
 import FeaturesSection from './Features';
 import LifePlansHero from './LifePlan';
+import Plans from './plans';
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
         <Cards />
         <FeaturesSection/>
         <LifePlansHero/>
+        {/* <Plans/> */}
       </div>
       {/* <Reviews/> */}
      
