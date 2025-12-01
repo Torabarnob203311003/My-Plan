@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Forms = () => {
   const [step, setStep] = useState(1);
@@ -46,7 +46,7 @@ const Forms = () => {
 
   const handleSave = () => {
     alert(JSON.stringify(formData, null, 2)); // Show form data in an alert
-    navigate('/home'); // Navigate to /home after saving
+    navigate('/'); // Navigate to home after saving
   };
 
   return (
@@ -61,6 +61,14 @@ const Forms = () => {
             }`}
           ></div>
         ))}
+      </div>
+
+      {/* Form Header with Back Button */}
+      <div className='w-full max-w-2xl flex items-center justify-between mb-4'>
+        <Link to='/' className='text-[#4A90E2] hover:text-[#2E6AA7] font-semibold flex items-center'>
+          <span className='mr-2'>←</span> Back Home
+        </Link>
+        <h1 className='text-2xl font-bold text-[#2E6AA7]'>Your Plans</h1>
       </div>
 
       {/* Form */}

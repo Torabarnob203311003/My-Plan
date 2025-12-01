@@ -55,12 +55,12 @@ const LoginPage = () => {
             onChange={e => setPassword(e.target.value)}
             className='w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E6AA7]'
           />
-          <Link to='/login'
+          <button
             type='submit'
             className='w-full bg-[#2E6AA7] text-white py-3 rounded-lg hover:opacity-90 transition'
           >
             Login
-          </Link>
+          </button>
         </form>
         <p className='mt-4 text-sm'>
           Don’t have an account?{' '}

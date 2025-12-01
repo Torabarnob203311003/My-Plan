@@ -10,8 +10,10 @@ import AboutUs from './Layout/AboutUs';
 import Home from './Layout/Home';
 import TermsOfUse from './Layout/TermsOfUs';
 import Reviews from './Layout/Reviews';
-// import Price from './Price';
 import Plans from './Layout/plans';
+import FAQ from './Layout/FAQ';
+import MessageCenterPage from './Layout/MessageCenterPage'
+import CustomerServicePage from './Layout/CustomerServicePage'
 
 const App = () => {
   return (
@@ -26,6 +28,10 @@ const App = () => {
           <Route path='reviews' element={<Reviews />} /> {/* Reviews at "/reviews" */}
           <Route path='plans' element={<Plans />} /> {/* Pricing plans at "/plans" */}
           <Route path='terms' element={<TermsOfUse />} /> {/* Terms at "/terms" */}
+          <Route path='customer-service' element={<CustomerServicePage/>} /> {/* Customer Service */}
+      
+          <Route path='message-center' element={<MessageCenterPage />} /> {/* Message Center */}
+          <Route path='faq' element={<FAQ />} /> {/* FAQ */}
         </Route>
         
         {/* Standalone routes outside Layout (no navbar/footer) */}

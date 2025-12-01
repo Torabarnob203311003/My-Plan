@@ -38,12 +38,12 @@ const Navbar = () => {
             </Link>
 
            </div>
-            <button className='px-5 lg:px-6 py-2 lg:py-2.5 rounded-md border-2 border-gray-300 text-gray-700 font-semibold hover:border-[#4A90E2] hover:text-[#4A90E2] transition text-sm lg:text-base'>
+            <Link to='/login' className='px-5 lg:px-6 py-2 lg:py-2.5 rounded-md border-2 border-gray-300 text-gray-700 font-semibold hover:border-[#4A90E2] hover:text-[#4A90E2] transition text-sm lg:text-base inline-block'>
               Log in
-            </button>
-            <button className='px-5 lg:px-6 py-2 lg:py-2.5 rounded-md bg-[#FF6B35] text-white font-semibold hover:bg-[#FF5722] transition text-sm lg:text-base'>
+            </Link>
+            <Link to='/signup' className='px-5 lg:px-6 py-2 lg:py-2.5 rounded-md bg-[#FF6B35] text-white font-semibold hover:bg-[#FF5722] transition text-sm lg:text-base inline-block'>
               Sign up
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -80,23 +80,23 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className='md:hidden pb-4 border-t border-gray-200 mt-2'>
             <div className="flex flex-col space-y-3 pt-4">
-              <a href='#about' className='text-gray-700 hover:text-[#4A90E2] font-medium py-2 px-2 rounded hover:bg-gray-50 transition' onClick={() => setIsMenuOpen(false)}>
+              <Link to='about' className='text-gray-700 hover:text-[#4A90E2] font-medium py-2 px-2 rounded hover:bg-gray-50 transition' onClick={() => setIsMenuOpen(false)}>
                 About
-              </a>
-              <a href='#reviews' className='text-gray-700 hover:text-[#4A90E2] font-medium py-2 px-2 rounded hover:bg-gray-50 transition' onClick={() => setIsMenuOpen(false)}>
+              </Link>
+              <Link to='reviews' className='text-gray-700 hover:text-[#4A90E2] font-medium py-2 px-2 rounded hover:bg-gray-50 transition' onClick={() => setIsMenuOpen(false)}>
                 Reviews
-              </a>
-              <a href='#plans' className='text-gray-700 hover:text-[#4A90E2] font-medium py-2 px-2 rounded hover:bg-gray-50 transition' onClick={() => setIsMenuOpen(false)}>
+              </Link>
+              <Link to='plans' className='text-gray-700 hover:text-[#4A90E2] font-medium py-2 px-2 rounded hover:bg-gray-50 transition' onClick={() => setIsMenuOpen(false)}>
                 Plans
-              </a>
+              </Link>
               
               <div className="flex flex-col space-y-2 pt-2">
-                <button className='py-2.5 px-4 rounded-md border-2 border-gray-300 text-gray-700 font-semibold hover:border-[#4A90E2] hover:text-[#4A90E2] transition' onClick={() => setIsMenuOpen(false)}>
+                <Link to='/login' className='py-2.5 px-4 rounded-md border-2 border-gray-300 text-gray-700 font-semibold hover:border-[#4A90E2] hover:text-[#4A90E2] transition inline-block w-full text-center' onClick={() => setIsMenuOpen(false)}>
                   Log in
-                </button>
-                <button className='py-2.5 px-4 rounded-md bg-[#FF6B35] text-white font-semibold hover:bg-[#FF5722] transition' onClick={() => setIsMenuOpen(false)}>
+                </Link>
+                <Link to='/signup' className='py-2.5 px-4 rounded-md bg-[#FF6B35] text-white font-semibold hover:bg-[#FF5722] transition inline-block w-full text-center' onClick={() => setIsMenuOpen(false)}>
                   Sign up
-                </button>
+                </Link>
               </div>
             </div>
           </div>
