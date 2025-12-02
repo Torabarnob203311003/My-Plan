@@ -1,7 +1,7 @@
 // components/SignupPage.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import { toast } from 'sonner';
 
 const SignupPage = () => {
   const [email, setEmail] = useState('');

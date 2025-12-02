@@ -1,7 +1,6 @@
 // App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
 import LoginPage from './LoginPage';
 import SignupPage from './SignupPage';
 import Forms from './Forms';
@@ -18,7 +17,6 @@ import CustomerServicePage from './Layout/CustomerServicePage'
 const App = () => {
   return (
     <Router>
-      <Toaster position='top-right' />
       <Routes>
         {/* Layout as parent route with nested children */}
         <Route path='/' element={<Layout />}>

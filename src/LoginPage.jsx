@@ -1,77 +1,122 @@
+/* eslint-disable no-unused-vars */
 // LoginPage.jsx
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { jwtDecode } from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { useLoginMutation } from "./redux/features/auth/authApi";
+import { storToken, storUserData } from "./redux/features/auth/authSlice";
+import { toast } from "sonner";
+
+
+// Redux
+
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleLogin = e => {
-    e.preventDefault();
+  // RTK Query login API
+  const [loginUser, { isLoading }] = useLoginMutation();
 
-    const user = JSON.parse(localStorage.getItem('user'));
+  // React Hook Form
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-    if (!user) {
-      toast.error('No account found! Please sign up.');
-      return;
-    }
+  // Handle API Login
+  const onSubmit = async (data) => {
+    try {
+      const res = await loginUser(data);
 
-    if (email === user.email && password === user.password) {
-      toast.success('Login successful!');
-      // Wait 1 second so the toast is visible, then navigate
-      setTimeout(() => {
-        navigate('/signup/form');
-      }, 1000);
-    } else {
-      toast.error('Invalid email or password');
+      // If login failed
+      if (res?.error && !res?.error?.data?.success) {
+        return toast.error(res.error.data.message);
+      }
+
+      // If login successful
+      if (res.data.success) {
+        toast.success(res.data.message);
+
+        reset({ email: "", password: "" });
+
+        // Store token
+        localStorage.setItem("accessToken", res.data.data.accessToken);
+
+        // Decode
+        const decoded = jwtDecode(res.data.data.accessToken);
+        const { exp, iat, ...rest } = decoded;
+
+        // Check admin role
+        if (rest?.role === "ADMIN") {
+          dispatch(storToken(res.data.data.accessToken));
+          dispatch(storUserData(rest));
+          localStorage.setItem("token", res.data.data.accessToken);
+
+          navigate("/");
+        } else {
+          toast.error("Unauthorized Access");
+        }
+      }
+    } catch (err) {
+      toast.error("Login Failed");
     }
   };
 
   return (
-    <div className='min-h-screen flex flex-col justify-between items-center bg-gray-100'>
-      {/* Toast container */}
-      <Toaster position='top-right' />
+    <div className="min-h-screen flex flex-col justify-between items-center bg-gray-100">
 
       {/* Top wave */}
-      <div className='w-full h-32 rounded-b-[50%_30%] bg-gradient-to-b from-[rgba(62,150,238,0.8918)] to-[rgba(39,99,159,0.98)]'></div>
+      <div className="w-full h-32 rounded-b-[50%_30%] bg-gradient-to-b from-[rgba(62,150,238,0.8918)] to-[rgba(39,99,159,0.98)]"></div>
 
-      {/* Login box */}
-      <div className='bg-white shadow-lg rounded-xl p-8 w-96 max-w-[90%] text-center'>
-        <h1 className='text-3xl font-bold text-blue-600 mb-6'>Planeer</h1>
-        <form className='space-y-4' onSubmit={handleLogin}>
+      {/* Login Form */}
+      <div className="bg-white shadow-lg rounded-xl p-8 w-96 max-w-[90%] text-center">
+        <h1 className="text-3xl font-bold text-blue-600 mb-6">Planeer</h1>
+
+        <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
           <input
-            type='email'
-            placeholder='Email'
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            className='w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E6AA7]'
+            type="email"
+            placeholder="Email"
+            {...register("email", { required: "Email is required" })}
+            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E6AA7]"
           />
+          {errors.email && (
+            <p className="text-red-500 text-sm text-left">{errors.email.message}</p>
+          )}
+
           <input
-            type='password'
-            placeholder='Password'
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            className='w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E6AA7]'
+            type="password"
+            placeholder="Password"
+            {...register("password", { required: "Password is required" })}
+            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E6AA7]"
           />
+          {errors.password && (
+            <p className="text-red-500 text-sm text-left">{errors.password.message}</p>
+          )}
+
           <button
-            type='submit'
-            className='w-full bg-[#2E6AA7] text-white py-3 rounded-lg hover:opacity-90 transition'
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-[#2E6AA7] text-white py-3 rounded-lg hover:opacity-90 transition disabled:opacity-50"
           >
-            Login
+            {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
-        <p className='mt-4 text-sm'>
-          Don’t have an account?{' '}
-          <Link to='/signup' className='text-[#2E6AA7] hover:underline'>
+
+        <p className="mt-4 text-sm">
+          Don’t have an account?{" "}
+          <Link to="/signup" className="text-[#2E6AA7] hover:underline">
             Sign up here
           </Link>
         </p>
       </div>
 
       {/* Bottom wave */}
-      <div className='w-full h-32 rounded-t-[50%_30%] bg-gradient-to-t from-[rgba(39,99,159,0.98)] to-[rgba(62,150,238,0.8918)]'></div>
+      <div className="w-full h-32 rounded-t-[50%_30%] bg-gradient-to-t from-[rgba(39,99,159,0.98)] to-[rgba(62,150,238,0.8918)]"></div>
     </div>
   );
 };
