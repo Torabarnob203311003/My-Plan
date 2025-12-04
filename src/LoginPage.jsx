@@ -9,9 +9,7 @@ import { useLoginMutation } from "./redux/features/auth/authApi";
 import { storToken, storUserData } from "./redux/features/auth/authSlice";
 import { toast } from "sonner";
 
-
 // Redux
-
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -32,7 +30,7 @@ const LoginPage = () => {
   const onSubmit = async (data) => {
     try {
       const res = await loginUser(data);
-
+      console.log(res);
       // If login failed
       if (res?.error && !res?.error?.data?.success) {
         return toast.error(res.error.data.message);
@@ -45,22 +43,19 @@ const LoginPage = () => {
         reset({ email: "", password: "" });
 
         // Store token
-        localStorage.setItem("accessToken", res.data.data.accessToken);
+        localStorage.setItem("accessToken", res.data.data.token);
 
         // Decode
-        const decoded = jwtDecode(res.data.data.accessToken);
+        const decoded = jwtDecode(res.data.data.token);
         const { exp, iat, ...rest } = decoded;
 
         // Check admin role
-        if (rest?.role === "ADMIN") {
-          dispatch(storToken(res.data.data.accessToken));
-          dispatch(storUserData(rest));
-          localStorage.setItem("token", res.data.data.accessToken);
 
-          navigate("/");
-        } else {
-          toast.error("Unauthorized Access");
-        }
+        dispatch(storToken(res.data.data.token));
+        dispatch(storUserData(rest));
+        localStorage.setItem("token", res.data.data.token);
+
+        navigate("/");
       }
     } catch (err) {
       toast.error("Login Failed");
@@ -69,7 +64,6 @@ const LoginPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-between items-center bg-gray-100">
-
       {/* Top wave */}
       <div className="w-full h-32 rounded-b-[50%_30%] bg-gradient-to-b from-[rgba(62,150,238,0.8918)] to-[rgba(39,99,159,0.98)]"></div>
 
@@ -85,7 +79,9 @@ const LoginPage = () => {
             className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E6AA7]"
           />
           {errors.email && (
-            <p className="text-red-500 text-sm text-left">{errors.email.message}</p>
+            <p className="text-red-500 text-sm text-left">
+              {errors.email.message}
+            </p>
           )}
 
           <input
@@ -95,7 +91,9 @@ const LoginPage = () => {
             className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E6AA7]"
           />
           {errors.password && (
-            <p className="text-red-500 text-sm text-left">{errors.password.message}</p>
+            <p className="text-red-500 text-sm text-left">
+              {errors.password.message}
+            </p>
           )}
 
           <button
