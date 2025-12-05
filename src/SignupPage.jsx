@@ -36,13 +36,26 @@ const SignupPage = () => {
       if (res?.error && !res?.error?.data?.success) {
         return toast.error(res.error.data.message);
       }
-
-      // Signup success
       if (res.data.success) {
         toast.success(res.data.message);
-        navigate("/login");
+
+        reset({ email: "", password: "" });
+
+        // Store token
+        localStorage.setItem("accessToken", res.data.data.token);
+
+        // Decode
+        const decoded = jwtDecode(res.data.data.token);
+        const { exp, iat, ...rest } = decoded;
+
+        // Check admin role
+
+        dispatch(storToken(res.data.data.token));
+        dispatch(storUserData(rest));
         reset({ email: "", phoneNumber: "", password: "" });
+        navigate("/signup/form");
       }
+      // Signup success
     } catch (err) {
       console.log(err);
       toast.error("Signup Failed");

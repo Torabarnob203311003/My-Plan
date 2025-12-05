@@ -1,11 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { useSubmitStep1Mutation } from "../../redux/features/forms/formsApi";
+import { useCreateProfileDataMutation } from "../redux/features/forms/formsApi";
 
 const Step1 = ({ nextStep }) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [submitStep1, { isLoading }] = useSubmitStep1Mutation();
+  const [submitStep1, { isLoading }] = useCreateProfileDataMutation();
 
   const onSubmit = async (data) => {
     try {

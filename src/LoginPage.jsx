@@ -53,7 +53,6 @@ const LoginPage = () => {
 
         dispatch(storToken(res.data.data.token));
         dispatch(storUserData(rest));
-        localStorage.setItem("token", res.data.data.token);
 
         navigate("/");
       }

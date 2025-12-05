@@ -1,11 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { useSubmitStep4Mutation } from "../../redux/features/forms/formsApi";
+import { useCreateHomeDataMutation } from "../redux/features/forms/formsApi";
 
 const Step4 = ({ nextStep, prevStep }) => {
   const { register, handleSubmit } = useForm();
-  const [submitStep4, { isLoading }] = useSubmitStep4Mutation();
+  const [submitStep4, { isLoading }] = useCreateHomeDataMutation();
 
   const onSubmit = async (data) => {
     try {

@@ -1,14 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { useSubmitStep3Mutation } from "../../redux/features/forms/formsApi";
+import { useCreateFinancialDataMutation } from "../redux/features/forms/formsApi";
 
 const Step3 = ({ nextStep, prevStep }) => {
   const {
     register,
     handleSubmit,
   } = useForm();
-  const [submitStep3, { isLoading }] = useSubmitStep3Mutation();
+  const [submitStep3, { isLoading }] = useCreateFinancialDataMutation();
 
   const onSubmit = async (data) => {
     try {

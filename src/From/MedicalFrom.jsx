@@ -1,11 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { useSubmitStep2Mutation } from "../../redux/features/forms/formsApi";
+import { useCreateMedicalDataMutation } from "../redux/features/forms/formsApi";
 
 const Step2 = ({ nextStep, prevStep }) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [submitStep2, { isLoading }] = useSubmitStep2Mutation();
+  const [submitStep2, { isLoading }] = useCreateMedicalDataMutation();
 
   const onSubmit = async (data) => {
     try {

@@ -1,11 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { useSubmitStep5Mutation } from "../../redux/features/forms/formsApi";
+import { useCreateSocialDataMutation } from "../redux/features/forms/formsApi";
 
 const Step5 = ({ prevStep, handleSaveAll }) => {
   const { register, handleSubmit } = useForm();
-  const [submitStep5, { isLoading }] = useSubmitStep5Mutation();
+  const [submitStep5, { isLoading }] = useCreateSocialDataMutation();
 
   const onSubmit = async (data) => {
     try {
