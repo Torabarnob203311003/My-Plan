@@ -1,9 +1,10 @@
 import { ChevronDown } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const AccountSummaryPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gray-100">
- 
       {/* Welcome Banner */}
       <div className="bg-gradient-to-r from-blue-400 to-blue-500 text-white py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,36 +45,54 @@ const AccountSummaryPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Financial */}
-            <div className="bg-white rounded-2xl border-2 border-gray-300 p-6 h-32">
+            <div
+              onClick={() => navigate("/update/financial")}
+              className="bg-white rounded-2xl border-2 border-gray-300 p-6 h-32 cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300"
+            >
               <h3 className="text-lg font-medium text-gray-700">Financial</h3>
             </div>
 
             {/* Personal Items & Effects */}
-            <div className="bg-white rounded-2xl border-2 border-gray-300 p-6 h-32">
+            <div
+              onClick={() => navigate("/update/profile")}
+              className="bg-white rounded-2xl border-2 border-gray-300 p-6 h-32 cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300"
+            >
               <h3 className="text-lg font-medium text-gray-700">
                 Personal Items &Effects
               </h3>
             </div>
 
             {/* Medical */}
-            <div className="bg-white rounded-2xl border-2 border-gray-300 p-6 h-32">
+            <div
+              onClick={() => navigate("/update/medical")}
+              className="bg-white rounded-2xl border-2 border-gray-300 p-6 h-32 cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300"
+            >
               <h3 className="text-lg font-medium text-gray-700">Medical</h3>
             </div>
 
             {/* Subscriptions */}
-            <div className="bg-white rounded-2xl border-2 border-gray-300 p-6 h-32">
+            <div
+              onClick={() => navigate("/update/social")}
+              className="bg-white rounded-2xl border-2 border-gray-300 p-6 h-32 cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300"
+            >
               <h3 className="text-lg font-medium text-gray-700">
                 Subscriptions
               </h3>
             </div>
 
             {/* Home & Auto */}
-            <div className="bg-white rounded-2xl border-2 border-gray-300 p-6 h-32">
-              <h3 className="text-lg font-medium text-gray-700">Hom & Auto</h3>
+            <div
+              onClick={() => navigate("/update/home")}
+              className="bg-white rounded-2xl border-2 border-gray-300 p-6 h-32 cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300"
+            >
+              <h3 className="text-lg font-medium text-gray-700">Home & Auto</h3>
             </div>
 
             {/* Social Media & Online */}
-            <div className="bg-white rounded-2xl border-2 border-gray-300 p-6 h-32">
+            <div
+              onClick={() => navigate("/update/social")}
+              className="bg-white rounded-2xl border-2 border-gray-300 p-6 h-32 cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300"
+            >
               <h3 className="text-lg font-medium text-gray-700">
                 Social Media & Online
               </h3>
@@ -81,7 +100,6 @@ const AccountSummaryPage = () => {
           </div>
         </div>
       </div>
-
     </div>
   );
 };

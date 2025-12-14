@@ -31,6 +31,21 @@ const App = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/signup/form" element={<Forms />} />
         </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/update/social" element={<SocialInfoUpdatePage />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/update/home" element={<HomeInfoUpdatePage />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/update/financial" element={<FinancialUpdatePage />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/update/medical" element={<MedicalUpdatePage />} />
+        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path="/update/profile" element={<ProfileUpdatePage />} />
+        </Route>
 
         {/* Layout + Protected Nested Routes */}
         <Route element={<PrivateRoute />}>
