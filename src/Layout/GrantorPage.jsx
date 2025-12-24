@@ -1,6 +1,17 @@
-import { ChevronDown } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useGetUserGrantorsQuery } from "../redux/features/user/userApi";
 
 const GrantorSuggestionsPage = () => {
+  const { data, isLoading } = useGetUserGrantorsQuery(undefined);
+  const navigate = useNavigate();
+  if (isLoading) {
+  return (
+      <div className="w-full mx-auto h-96 mt-40">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+      </div>
+    );
+  }
+  console.log(data)
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Welcome Banner */}
@@ -13,49 +24,25 @@ const GrantorSuggestionsPage = () => {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Profile Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          {/* Grantor Card 1 */}
-          <div className="bg-white rounded-2xl border-2 border-gray-300 p-6 flex items-start space-x-4">
-            <div className="w-20 h-20 bg-gray-200 rounded-lg flex-shrink-0"></div>
-            <div>
-              <p className="text-gray-800 font-medium">Name and Last name</p>
-              <p className="text-gray-600 text-sm">City, State</p>
-              <p className="text-gray-600 text-sm">Grantor</p>
-            </div>
-          </div>
-
-          {/* Grantor Card 2 */}
-          <div className="bg-white rounded-2xl border-2 border-gray-300 p-6 flex items-start space-x-4">
-            <div className="w-20 h-20 bg-gray-200 rounded-lg flex-shrink-0"></div>
-            <div>
-              <p className="text-gray-800 font-medium">Name and Last name</p>
-              <p className="text-gray-600 text-sm">City, State</p>
-              <p className="text-gray-600 text-sm">Grantor</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Second Row of Profile Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-          {/* Grantor Card 3 */}
-          <div className="bg-white rounded-2xl border-2 border-gray-300 p-6 flex items-start space-x-4">
-            <div className="w-20 h-20 bg-gray-200 rounded-lg flex-shrink-0"></div>
-            <div>
-              <p className="text-gray-800 font-medium">Name and Last name</p>
-              <p className="text-gray-600 text-sm">City, State</p>
-              <p className="text-gray-600 text-sm">Grantor</p>
+          {/* Primary Proxy Card */}
+          {data?.data?.map((grantor, i) => (
+            <div
+            onClick={()=>navigate(`/grantor/${grantor._id}`)}
+              key={i}
+              className="bg-white rounded-2xl border-2 border-gray-300 p-6 flex items-start space-x-4 cursor-pointer"
+            >
+              <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
+                <span className="text-sm font-semibold">👤</span>
+              </div>
+              <div>
+                <p className="text-gray-800 font-medium">{grantor?.email}</p>
+                <p className="text-gray-800 font-medium">
+                  {grantor?.phoneNumber}
+                </p>
+              </div>
             </div>
-          </div>
-
-          {/* Grantor Card 4 */}
-          <div className="bg-white rounded-2xl border-2 border-gray-300 p-6 flex items-start space-x-4">
-            <div className="w-20 h-20 bg-gray-200 rounded-lg flex-shrink-0"></div>
-            <div>
-              <p className="text-gray-800 font-medium">Name and Last name</p>
-              <p className="text-gray-600 text-sm">City, State</p>
-              <p className="text-gray-600 text-sm">Grantor</p>
-            </div>
-          </div>
+          ))}
         </div>
 
         {/* Suggestions Section */}

@@ -1,15 +1,21 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useGetFinancialQuery } from "../redux/features/forms/formsApi";
+
 import FinancialUpdateFrom from "./FinancialUpdateFrom";
+import { useGetFinancialQuery } from "../redux/features/forms/formsApi";
 
 const FinancialUpdatePage = () => {
   const navigate = useNavigate();
-  const { data: financial } = useGetFinancialQuery();
-
+  const { data: financial, isLoading } = useGetFinancialQuery();
   const handleNext = () => navigate("/");
   const handleBack = () => navigate(-1);
-
+  if (isLoading) {
+    return (
+      <div className="w-full mx-auto h-96 mt-40">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gray-100">
       {/* Header */}
@@ -20,7 +26,9 @@ const FinancialUpdatePage = () => {
         >
           <span className="mr-2">←</span> Back Home
         </Link>
-        <h1 className="text-2xl font-bold text-[#2E6AA7]">Update Financial Info</h1>
+        <h1 className="text-2xl font-bold text-[#2E6AA7]">
+          Update Financial Info
+        </h1>
       </div>
 
       <div className="w-full max-w-2xl bg-white p-8 rounded-lg shadow-lg">

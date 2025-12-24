@@ -11,13 +11,19 @@ import AboutUs from "./Layout/AboutUs";
 import Home from "./Layout/Home";
 import TermsOfUse from "./Layout/TermsOfUs";
 import Reviews from "./Layout/Reviews";
-import Plans from "./Layout/plans";
 import FAQ from "./Layout/FAQ";
 import MessageCenterPage from "./Layout/MessageCenterPage";
 import CustomerServicePage from "./Layout/CustomerServicePage";
 import PrivateRoute from "./Layout/PrivateRoute";
 import AccountSummaryPage from "./Layout/AccountSummaryPage";
 import GrantorSuggestionsPage from "./Layout/GrantorPage";
+import SocialInfoUpdatePage from "../src/updateFroms/SocialInfoUpdatePage";
+import HomeInfoUpdatePage from "../src/updateFroms/HomeInfoUpdatePage";
+import FinancialUpdatePage from "../src/updateFroms/FinancialUpdatePage";
+import ProfileUpdatePage from "../src/updateFroms/ProfileUpdatePage";
+import MedicalUpdatePage from "../src/updateFroms/MedicalUpdatePage";
+import GrantorAccount from "./Layout/GrantorAccount";
+import Plans from "./Layout/plans";
 
 const App = () => {
   return (
@@ -61,6 +67,7 @@ const App = () => {
             <Route path="faq" element={<FAQ />} />
             <Route path="account" element={<AccountSummaryPage />} />
             <Route path="grantor" element={<GrantorSuggestionsPage />} />
+            <Route path="grantor/:id" element={<GrantorAccount />} />
           </Route>
         </Route>
       </Routes>

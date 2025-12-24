@@ -48,7 +48,6 @@ const LoginPage = () => {
         // Decode
         const decoded = jwtDecode(res.data.data.token);
         const { exp, iat, ...rest } = decoded;
-
         // Check admin role
 
         dispatch(storToken(res.data.data.token));

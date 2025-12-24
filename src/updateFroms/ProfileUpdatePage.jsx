@@ -1,14 +1,21 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useGetProfileQuery } from "../redux/features/forms/formsApi";
+
 import ProfileUpdateFrom from "./ProfileUpdateFrom";
+import { useGetProfileQuery } from "../redux/features/forms/formsApi";
 
 const ProfileUpdatePage = () => {
   const navigate = useNavigate();
-  const { data: profile } = useGetProfileQuery();
+  const { data: profile,isLoading } = useGetProfileQuery();
 
   const handleNext = () => navigate("/");
-
+  if (isLoading) {
+    return (
+      <div className="w-full mx-auto h-96 mt-40">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gray-100">
       {/* Header */}

@@ -9,8 +9,8 @@ const ProfileUpdateFrom = ({ nextStep, existingData }) => {
 
   // Reset form when existingData arrives
   useEffect(() => {
-    if (existingData) reset(existingData);
-  }, [existingData, reset]);
+    if (existingData.data) reset(existingData.data);
+  }, [existingData.data, reset]);
 
   const onSubmit = async (data) => {
     const res = await updateStep1(data);
@@ -23,11 +23,36 @@ const ProfileUpdateFrom = ({ nextStep, existingData }) => {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <h2 className="text-xl font-semibold mb-6">Update Your Profile</h2>
 
-      <input {...register("firstName")} placeholder="First Name" className="input" />
-      <input {...register("lastName")} placeholder="Last Name" className="input" />
-      <input type="date" {...register("dob")} className="input" />
-      <input {...register("city")} placeholder="City" className="input" />
-      <input {...register("state")} placeholder="State" className="input" />
+      <input
+        {...register("firstName")}
+        defaultValue={existingData.data.firstName}
+        placeholder="First Name"
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+      <input
+        {...register("lastName")}
+        defaultValue={existingData.data.lastName}
+        placeholder="Last Name"
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+      <input
+        type="date"
+        {...register("dob")}
+        defaultValue={existingData.data.dob}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+      <input
+        {...register("city")}
+        defaultValue={existingData.data.city}
+        placeholder="City"
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+      <input
+        {...register("state")}
+        defaultValue={existingData.data.state}
+        placeholder="State"
+        className="w-full px-4 py-3 border rounded-lg"
+      />
 
       <button type="submit" disabled={isLoading} className="btn-primary">
         {isLoading ? "Saving..." : "Next"}
