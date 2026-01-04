@@ -1,17 +1,43 @@
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
+import { useSendMessageMutation } from "../redux/features/user/userApi";
 
 const MessageCenterPage = () => {
   const [problem, setProblem] = useState("");
   const [details, setDetails] = useState("");
 
-  const handleSubmit = () => {
-    if (problem && details) {
-      alert("Message submitted!");
+  // RTK Query mutation hook
+  const [sendMessage, { isLoading }] =
+    useSendMessageMutation();
+
+  const handleSubmit = async () => {
+    if (!problem || !details) {
+      alert("Please fill in all fields");
+      return;
+    }
+
+    try {
+      const result = await sendMessage({
+        problemtitle: problem,
+        desdetails: details,
+      });
+      if (result.error) {
+        toast.error(result.error.data?.message || "Failed to submit message.");
+        return;
+      }
+      if (result.data.status) {
+        toast.success("Message submitted successfully!");
+      } else {
+        toast.error(result.data?.message || "Failed to submit message.");
+        return;
+      }
+
       setProblem("");
       setDetails("");
-    } else {
-      alert("Please fill in all fields");
+    } catch (err) {
+      console.error("Failed to send message:", err);
+      toast.error("Failed to submit message. Please try again.");
     }
   };
 
@@ -82,9 +108,12 @@ const MessageCenterPage = () => {
 
           <button
             onClick={handleSubmit}
-            className="bg-blue-400 hover:bg-blue-500 text-white font-medium px-8 py-3 rounded-lg transition-colors"
+            disabled={isLoading}
+            className={`bg-blue-400 hover:bg-blue-500 text-white font-medium px-8 py-3 rounded-lg transition-colors ${
+              isLoading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
-            Submit
+            {isLoading ? "Submitting..." : "Submit"}
           </button>
         </div>
 
@@ -119,4 +148,5 @@ const MessageCenterPage = () => {
     </div>
   );
 };
+
 export default MessageCenterPage;

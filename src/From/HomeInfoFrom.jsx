@@ -20,39 +20,99 @@ const Step4 = ({ nextStep, prevStep }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <h2 className="text-xl font-semibold mb-6">Home & Auto Information</h2>
+      <h2 className="text-xl font-semibold mb-6">
+        Edit Home & Auto Information
+      </h2>
 
+      {/* Vehicle Section */}
       <input
         type="text"
-        placeholder="Vehicle Ownership"
+        placeholder="Do you Own or Lease your vehicle?"
         {...register("vehicleOwnership")}
         className="w-full px-4 py-3 border rounded-lg"
       />
+
       <input
         type="text"
-        placeholder="Vehicle Make & Model"
+        placeholder="What Make & Model?"
         {...register("vehicleMakeModel")}
         className="w-full px-4 py-3 border rounded-lg"
       />
+
       <input
         type="text"
-        placeholder="Car Insurance"
-        {...register("carInsuranceProvider")}
-        className="w-full px-4 py-3 border rounded-lg"
-      />
-      <input
-        type="text"
-        placeholder="Home Ownership"
-        {...register("homeOccupancy")}
-        className="w-full px-4 py-3 border rounded-lg"
-      />
-      <input
-        type="text"
-        placeholder="Homeowner Insurance"
-        {...register("homeInsuranceType")}
+        placeholder="Car Insurance?"
+        {...register("carInsurance")}
         className="w-full px-4 py-3 border rounded-lg"
       />
 
+      <input
+        type="text"
+        placeholder="Add another vehicle?"
+        {...register("addAnotherVehicle")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      <input
+        type="text"
+        placeholder="Have an ATV/Boat/Motorcycle?"
+        {...register("hasAtvBoatMotorcycle")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      {/* Duplicate UI fields shown in design */}
+      <input
+        type="text"
+        placeholder="Own or Lease your vehicle?"
+        {...register("vehicleOwnershipDuplicate")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      <input
+        type="text"
+        placeholder="Make & Model?"
+        {...register("vehicleMakeModelDuplicate")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      <input
+        type="text"
+        placeholder="ATV/Boat/Motorcycle?"
+        {...register("atvBoatMotorcycleDetails")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      {/* Home Section */}
+      <input
+        type="text"
+        placeholder="Do you Own or Rent your home?"
+        {...register("homeOwnership")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      <input
+        type="text"
+        placeholder="Have Homeowner/Renter Insurance?"
+        {...register("homeInsurance")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      {/* Duplicate UI fields shown in design */}
+      <input
+        type="text"
+        placeholder="Own or Rent your home?"
+        {...register("homeOwnershipDuplicate")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      <input
+        type="text"
+        placeholder="Homeowner/Renter Insurance?"
+        {...register("homeInsuranceDuplicate")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      {/* Navigation */}
       <div className="flex justify-between mt-6">
         <button
           type="button"

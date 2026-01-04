@@ -20,15 +20,61 @@ const Step5 = ({ prevStep, handleSaveAll }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <h2 className="text-xl font-semibold mb-6">Social Information</h2>
+      <h2 className="text-xl font-semibold mb-6">
+        Social Information
+      </h2>
 
-      <input type="text" placeholder="Social Media" {...register("socialMedia")} className="w-full px-4 py-3 border rounded-lg" />
-      <input type="text" placeholder="Website" {...register("website")} className="w-full px-4 py-3 border rounded-lg" />
-      <input type="text" placeholder="Streaming Service" {...register("streamingService")} className="w-full px-4 py-3 border rounded-lg" />
+      {/* Social fields */}
+      <input
+        type="text"
+        placeholder="Subscribed to a Streaming service?"
+        {...register("streamingService")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      <input
+        type="text"
+        placeholder="Have a Website?"
+        {...register("website")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      <input
+        type="text"
+        placeholder="Have Social media?"
+        {...register("socialMedia")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      {/* Duplicate UI fields shown in design */}
+      <input
+        type="text"
+        placeholder="Subscribed to a Streaming service?"
+        {...register("streamingServiceDuplicate")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      <input
+        type="text"
+        placeholder="Have a Website?"
+        {...register("websiteDuplicate")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
 
       <div className="flex justify-between mt-6">
-        <button type="button" onClick={prevStep} className="w-1/2 mr-2 bg-gray-400 text-white py-3 rounded-lg hover:opacity-90 transition">Back</button>
-        <button type="submit" disabled={isLoading} className="w-1/2 ml-2 bg-blue-600 text-white py-3 rounded-lg hover:opacity-90 transition">
+        <button
+          type="button"
+          onClick={prevStep}
+          className="w-1/2 mr-2 bg-gray-400 text-white py-3 rounded-lg hover:opacity-90 transition"
+        >
+          Back
+        </button>
+
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-1/2 ml-2 bg-blue-600 text-white py-3 rounded-lg hover:opacity-90 transition"
+        >
           {isLoading ? "Saving..." : "Save"}
         </button>
       </div>

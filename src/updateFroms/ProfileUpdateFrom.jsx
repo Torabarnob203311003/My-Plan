@@ -37,8 +37,8 @@ const ProfileUpdateFrom = ({ nextStep, existingData }) => {
       />
       <input
         type="date"
-        {...register("dob")}
-        defaultValue={existingData.data.dob}
+        {...register("dateOfBirth")}
+        defaultValue={existingData.data.dateOfBirth}
         className="w-full px-4 py-3 border rounded-lg"
       />
       <input

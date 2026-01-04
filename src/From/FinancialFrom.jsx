@@ -4,10 +4,7 @@ import { toast } from "sonner";
 import { useCreateFinancialDataMutation } from "../redux/features/forms/formsApi";
 
 const Step3 = ({ nextStep, prevStep }) => {
-  const {
-    register,
-    handleSubmit,
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   const [submitStep3, { isLoading }] = useCreateFinancialDataMutation();
 
   const onSubmit = async (data) => {
@@ -23,30 +20,63 @@ const Step3 = ({ nextStep, prevStep }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <h2 className="text-xl font-semibold mb-6">Financial Information</h2>
+      <h2 className="text-xl font-semibold mb-6">
+        Financial Information
+      </h2>
 
       <input
         type="text"
-        placeholder="Bank Account"
+        placeholder="Have a Bank account? (ex: Capital One)"
         {...register("bankAccount")}
         className="w-full px-4 py-3 border rounded-lg"
       />
+
       <input
         type="text"
-        placeholder="Retirement Account"
+        placeholder="Have a Retirement account? (ex: 401K plan)"
         {...register("retirementAccount")}
         className="w-full px-4 py-3 border rounded-lg"
       />
+
       <input
         type="text"
-        placeholder="Assets"
+        placeholder="What are your current Assets?"
         {...register("assets")}
         className="w-full px-4 py-3 border rounded-lg"
       />
+
       <input
         type="text"
-        placeholder="Debt"
+        placeholder="Assets value (ex: <$5,000)"
+        {...register("assetsValue")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      <input
+        type="text"
+        placeholder="Have any Debt?"
+        {...register("hasDebt")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      <input
+        type="text"
+        placeholder="Debt details"
         {...register("debt")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      <input
+        type="text"
+        placeholder="Business ownership (ex: Own a business)"
+        {...register("businessOwnership")}
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      <input
+        type="text"
+        placeholder="Other financial notes"
+        {...register("otherFinancialInfo")}
         className="w-full px-4 py-3 border rounded-lg"
       />
 

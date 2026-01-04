@@ -152,9 +152,9 @@ const authApi = baseApi.injectEndpoints({
       providesTags: ["getUser"],
     }),
     getAll: builder.query({
-      query: (userId) => {
+      query: () => {
         return {
-          url: `/alldata-percentage/${userId}`,
+          url: `/alluser-data`,
           method: "GET",
         };
       },

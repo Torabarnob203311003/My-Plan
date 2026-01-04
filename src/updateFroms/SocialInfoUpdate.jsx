@@ -4,12 +4,14 @@ import { toast } from "sonner";
 import { useUpdateSocialDataMutation } from "../redux/features/forms/formsApi";
 
 const SocialInfoUpdate = ({ prevStep, handleSaveAll, existingData }) => {
-  const { register, handleSubmit, reset } = useForm({ defaultValues: {} });
+  const { register, handleSubmit, reset } = useForm();
   const [updateStep5, { isLoading }] = useUpdateSocialDataMutation();
 
   useEffect(() => {
-    if (existingData.data) reset(existingData.data);
-  }, [existingData.data, reset]);
+    if (existingData?.data) {
+      reset(existingData.data);
+    }
+  }, [existingData, reset]);
 
   const onSubmit = async (data) => {
     const res = await updateStep5(data);
@@ -18,26 +20,47 @@ const SocialInfoUpdate = ({ prevStep, handleSaveAll, existingData }) => {
     handleSaveAll();
   };
 
+  const data = existingData?.data || {};
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <h2 className="text-xl font-semibold mb-6">Update Social Information</h2>
+      <h2 className="text-xl font-semibold mb-6">
+        Update Social Information
+      </h2>
+
+      <input
+        {...register("streamingService")}
+        defaultValue={data.streamingService}
+        placeholder="Subscribed to a Streaming service?"
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      <input
+        {...register("website")}
+        defaultValue={data.website}
+        placeholder="Have a Website?"
+        className="w-full px-4 py-3 border rounded-lg"
+      />
 
       <input
         {...register("socialMedia")}
-        defaultValue={existingData.data.socialMedia}
-        placeholder="Social Media"
+        defaultValue={data.socialMedia}
+        placeholder="Have Social media?"
         className="w-full px-4 py-3 border rounded-lg"
       />
+
+      {/* Duplicate UI fields */}
       <input
-        {...register("website")}
-        defaultValue={existingData.data.website}
-        placeholder="Website"
+        {...register("streamingServiceDuplicate")}
+        defaultValue={data.streamingServiceDuplicate}
+        placeholder="Subscribed to a Streaming service?"
         className="w-full px-4 py-3 border rounded-lg"
       />
+
       <input
-        {...register("streamingService")}
-        defaultValue={existingData.data.streamingService}
-        placeholder="Streaming Service"
+        {...register("websiteDuplicate")}
+        defaultValue={data.websiteDuplicate}
+        placeholder="Have a Website?"
         className="w-full px-4 py-3 border rounded-lg"
       />
 

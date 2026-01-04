@@ -5,7 +5,7 @@ const initialState = {
   loading: false,
   decodeUser: null,
   token: "",
-  collapsed: false,
+  step: 1,
 };
 
 export const userSlice = createSlice({
@@ -29,8 +29,8 @@ export const userSlice = createSlice({
     setLoading: (state, action) => {
       state.loading = action.payload;
     },
-    isCollapsed: (state, action) => {
-      state.collapsed = action.payload;
+    setStep: (state, action) => {
+      state.step = action.payload;
     },
   },
 });
@@ -41,7 +41,7 @@ export const {
   storToken,
   logOut,
   storDecodeUser,
-  isCollapsed,
+  setStep,
 } = userSlice.actions;
 
 export default userSlice.reducer;

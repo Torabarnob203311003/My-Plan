@@ -1,24 +1,45 @@
 const SocialInfoView = ({ existingData }) => {
+  const data = existingData || {};
+
   return (
     <form className="space-y-4">
-      <h2 className="text-xl font-semibold mb-6"> Social Information</h2>
+      <h2 className="text-xl font-semibold mb-6">
+        Social Information
+      </h2>
 
       <input
         disabled
-        defaultValue={existingData.socialMedia}
-        placeholder="Social Media"
+        defaultValue={data.streamingService}
+        placeholder="Subscribed to a Streaming service?"
         className="w-full px-4 py-3 border rounded-lg"
       />
+
       <input
         disabled
-        defaultValue={existingData.website}
-        placeholder="Website"
+        defaultValue={data.website}
+        placeholder="Have a Website?"
         className="w-full px-4 py-3 border rounded-lg"
       />
+
       <input
         disabled
-        defaultValue={existingData.streamingService}
-        placeholder="Streaming Service"
+        defaultValue={data.socialMedia}
+        placeholder="Have Social media?"
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      {/* Duplicate UI fields */}
+      <input
+        disabled
+        defaultValue={data.streamingServiceDuplicate}
+        placeholder="Subscribed to a Streaming service?"
+        className="w-full px-4 py-3 border rounded-lg"
+      />
+
+      <input
+        disabled
+        defaultValue={data.websiteDuplicate}
+        placeholder="Have a Website?"
         className="w-full px-4 py-3 border rounded-lg"
       />
     </form>

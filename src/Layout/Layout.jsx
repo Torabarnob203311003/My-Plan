@@ -14,7 +14,6 @@ const Layout = () => {
       <div className='flex-grow'>
         <Outlet /> {/* AboutUs, Home, Terms, etc. render here */}
       </div>
-<FAQ/>
       {/* Footer appears on all pages */}
       <Footer />
     </div>

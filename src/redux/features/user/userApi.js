@@ -13,7 +13,6 @@ const userApi = baseApi.injectEndpoints({
 
     getUser: builder.query({
       query: (id) => {
-
         return {
           url: `search`,
           method: "GET",
@@ -66,22 +65,29 @@ const userApi = baseApi.injectEndpoints({
       },
     }),
 
-    getAdminStats: builder.query({
-      query: (query) => {
+    getPlans: builder.query({
+      query: () => {
         return {
-          url: "admin/stats",
+          url: "packages",
           method: "GET",
-          params: query,
+        };
+      },
+    }),
+    createCheckoutSession: builder.mutation({
+      query: (id) => {
+        return {
+          url: `create-checkout-session/${id}`,
+          method: "POST",
         };
       },
     }),
 
-    emailUser: builder.mutation({
-      query: (email) => {
+    sendMessage: builder.mutation({
+      query: (body) => {
         return {
-          url: "email",
+          url: `create-report`,
           method: "POST",
-          body: email,
+          body,
         };
       },
     }),
@@ -89,8 +95,12 @@ const userApi = baseApi.injectEndpoints({
 });
 
 export const {
+  useCreateCheckoutSessionMutation,
+  useGetPlansQuery,
+
+  useSendMessageMutation,
+
   useGetProxyQuery,
-  useEmailUserMutation,
   useGetAllUsersQuery,
   useBlockUserMutation,
   useSetProxyMutation,

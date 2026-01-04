@@ -1,109 +1,99 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Mail, Twitter, Linkedin, Github } from 'lucide-react';
 
 export default function PlannerFooter() {
   return (
-    <footer className="w-full bg-[#83b9f0] text-white py-8 px-4 sm:py-10 md:py-12">
+    <footer className="w-full bg-gradient-to-r from-[#83b9f0] to-[#6ba5e0] text-white py-12 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-6">
-          {/* Logo */}
-          <div className="flex items-start justify-center sm:justify-start lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition">
-              <div className="relative">
-                <CheckCircle className="w-10 h-10 sm:w-12 sm:h-12" strokeWidth={2} />
-              </div>
-              <span className="text-xl sm:text-2xl font-semibold">planeer</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          
+          {/* Logo and Description */}
+          <div className="lg:col-span-1">
+            <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition mb-4">
+              <CheckCircle className="w-10 h-10" strokeWidth={2} />
+              <span className="text-2xl font-bold">planeer</span>
             </Link>
+            <p className="text-sm text-white/90 mb-4">
+              Streamline your workflow and boost productivity with our powerful planning tools.
+            </p>
+            {/* Social Links */}
+            <div className="flex gap-3">
+              <a href="#" className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-all backdrop-blur-sm">
+                <Twitter className="w-4 h-4" />
+              </a>
+              <a href="#" className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-all backdrop-blur-sm">
+                <Linkedin className="w-4 h-4" />
+              </a>
+              <a href="#" className="w-9 h-9 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-all backdrop-blur-sm">
+                <Github className="w-4 h-4" />
+              </a>
+            </div>
           </div>
 
-          {/* Column 1 */}
-          <div className="text-center sm:text-left">
-            <ul className="space-y-2 sm:space-y-3">
+          {/* Company */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Company</h3>
+            <ul className="space-y-2">
               <li>
-                <Link to="/about" className="text-sm sm:text-base hover:underline transition-all">
-                  About us
+                <Link to="/about" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
+                  About Us
                 </Link>
               </li>
               <li>
-                <a href="#" className="text-sm sm:text-base hover:underline transition-all">
-                  Enterprise
-                </a>
-              </li>
-              <li>
-                <Link to="/customer-service" className="text-sm sm:text-base hover:underline transition-all">
-                  Support
+                <Link to="/faq" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
+                  FAQ
                 </Link>
               </li>
               <li>
-                <Link to="/message-center" className="text-sm sm:text-base hover:underline transition-all">
+                <Link to="/message-center" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Support */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Support</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link to="/customer-service" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
                   Help Center
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          {/* Column 2 */}
-          <div className="text-center sm:text-left">
-            <ul className="space-y-2 sm:space-y-3">
               <li>
-                <a href="#" className="text-sm sm:text-base hover:underline transition-all">
-                  News
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sm sm:text-base hover:underline transition-all">
-                  Press
-                </a>
-              </li>
-              <li>
-                <Link to="/terms" className="text-sm sm:text-base hover:underline transition-all">
-                  Legal
-                </Link>
-              </li>
-              <li>
-                <Link to="/message-center" className="text-sm sm:text-base hover:underline transition-all">
-                  Contact us
+                <Link to="/message-center" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
+                  Support
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 3 */}
-          <div className="text-center sm:text-left">
-            <ul className="space-y-2 sm:space-y-3">
+          {/* Legal */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Legal</h3>
+            <ul className="space-y-2">
               <li>
-                <Link to="/faq" className="text-sm sm:text-base hover:underline transition-all">
-                  FAQ's
-                </Link>
-              </li>
-              <li>
-                <a href="#" className="text-sm sm:text-base hover:underline transition-all">
-                  Resources
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-sm sm:text-base hover:underline transition-all">
-                  Security
-                </a>
-              </li>
-              <li>
-                <Link to="/terms" className="text-sm sm:text-base hover:underline transition-all">
-                  Privacy Policy
+                <Link to="/terms" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
+                  Terms of Conditions
                 </Link>
               </li>
             </ul>
           </div>
+        </div>
 
-          {/* Bottom Right Links */}
-          <div className="lg:col-span-2 flex flex-col sm:flex-row lg:flex-col items-center sm:items-start lg:items-end justify-center lg:justify-between gap-3 sm:gap-4 lg:gap-6 text-center sm:text-left lg:text-right">
-            <div className="flex flex-wrap items-center justify-center sm:justify-start lg:justify-end gap-3 sm:gap-4">
-              <p className="text-xs sm:text-sm opacity-90">©2025 Planeer</p>
-              <Link to="/terms" className="text-xs sm:text-sm hover:underline transition-all opacity-90">
-                Terms of Service
-              </Link>
-              <a href="#" className="text-xs sm:text-sm hover:underline transition-all opacity-90">
-                Cookie Policy
+        {/* Bottom Bar */}
+        <div className="mt-12 pt-8 border-t border-white/20">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-white/80">
+              © 2025 Planeer. All rights reserved.
+            </p>
+            <div className="flex items-center gap-2 text-sm text-white/80">
+              <Mail className="w-4 h-4" />
+              <a href="mailto:support@planeer.com" className="hover:text-white transition-colors">
+                support@planeer.com
               </a>
             </div>
           </div>

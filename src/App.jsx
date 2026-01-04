@@ -23,7 +23,7 @@ import FinancialUpdatePage from "../src/updateFroms/FinancialUpdatePage";
 import ProfileUpdatePage from "../src/updateFroms/ProfileUpdatePage";
 import MedicalUpdatePage from "../src/updateFroms/MedicalUpdatePage";
 import GrantorAccount from "./Layout/GrantorAccount";
-import Plans from "./Layout/plans";
+import SubscriptionPage from "./Layout/plans";
 
 const App = () => {
   return (
@@ -60,7 +60,7 @@ const App = () => {
             <Route path="home" element={<Home />} />
             <Route path="about" element={<AboutUs />} />
             <Route path="reviews" element={<Reviews />} />
-            <Route path="plans" element={<Plans />} />
+            <Route path="plans" element={<SubscriptionPage />} />
             <Route path="terms" element={<TermsOfUse />} />
             <Route path="customer-service" element={<CustomerServicePage />} />
             <Route path="message-center" element={<MessageCenterPage />} />

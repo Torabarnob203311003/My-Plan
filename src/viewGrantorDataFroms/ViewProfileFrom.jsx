@@ -18,7 +18,7 @@ const ProfileViewFrom = ({ existingData }) => {
       <input
         disabled
         type="date"
-        defaultValue={existingData.dob}
+        defaultValue={existingData.dateOfBirth}
         className="w-full px-4 py-3 border rounded-lg"
       />
       <input
