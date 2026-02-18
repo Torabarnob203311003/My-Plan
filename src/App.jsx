@@ -24,10 +24,12 @@ import ProfileUpdatePage from "../src/updateFroms/ProfileUpdatePage";
 import MedicalUpdatePage from "../src/updateFroms/MedicalUpdatePage";
 import GrantorAccount from "./Layout/GrantorAccount";
 import SubscriptionPage from "./Layout/plans";
+import FeedbackModal from "./Layout/Feedback";
 
 const App = () => {
   return (
     <Router>
+      <FeedbackModal />
       <Routes>
         {/* Public Routes */}
         <Route path="/login" element={<LoginPage />} />

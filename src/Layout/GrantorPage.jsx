@@ -17,7 +17,7 @@ const GrantorSuggestionsPage = () => {
       {/* Welcome Banner */}
       <div className="bg-gradient-to-r from-blue-400 to-blue-500 text-white py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-lg">Welcome back, Shayla</p>
+          <p className="text-lg">Welcome back, Shayla admin </p>
         </div>
       </div>
 

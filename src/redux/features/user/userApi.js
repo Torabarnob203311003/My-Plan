@@ -91,6 +91,30 @@ const userApi = baseApi.injectEndpoints({
         };
       },
     }),
+
+
+    sendReview: builder.mutation({
+      query: (body) => {
+        return {
+          url: `create-review`,
+          method: "POST",
+          body,
+        };
+      },
+    }),
+
+
+    updateUser: builder.mutation({
+      query: (data) => {
+        return {
+          url: `ProfileUpdate`,
+          method: "PUT",
+          body: data,
+        };
+      },
+    }),
+
+
   }),
 });
 
@@ -99,6 +123,7 @@ export const {
   useGetPlansQuery,
 
   useSendMessageMutation,
+  useSendReviewMutation,
 
   useGetProxyQuery,
   useGetAllUsersQuery,
@@ -108,4 +133,5 @@ export const {
   useGetAdminStatsQuery,
   useGetUserGrantorsQuery,
   useGetUserGrantorDataQuery,
+  useUpdateUserMutation,
 } = userApi;

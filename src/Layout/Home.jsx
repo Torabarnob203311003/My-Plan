@@ -1,21 +1,38 @@
+/* eslint-disable no-unused-vars */
 import { useGetAllQuery } from "../redux/features/forms/formsApi";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetProxyQuery } from "../redux/features/user/userApi";
 import { useNavigate } from "react-router-dom";
 import { setStep } from "../redux/features/user/userSlice";
+import { useUpdateUserMutation } from "../redux/features/user/userApi";
+import { toast } from "sonner";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 
-const ProfileCard = ({ data, isLoading }) => {
+const getBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+};
+
+const ProfileCard = ({ data, isLoading, onEdit }) => {
   if (isLoading)
     return <div className="bg-gray-200 rounded-lg p-8 h-96 animate-pulse" />;
 
   return (
-    <div className="bg-gray-200 rounded-lg p-8 flex flex-col items-center">
-      <h3 className="text-gray-600 text-sm mb-1">
-        {/* {data.firstName} {data.lastName} */}
-      </h3>
-      {/* <p className="text-blue-500 font-semibold mb-6">{data.role}</p> */}
+    <div className="bg-gray-200 rounded-lg p-8 flex flex-col items-center group relative">
+      {/* Edit Icon */}
+      <button
+        onClick={onEdit}
+        className="absolute top-4 right-4 hidden group-hover:flex bg-white p-2 rounded-full shadow-md"
+      >
+        ✏️
+      </button>
+
       <div className="relative w-48 h-48">
-        {/* Progress circle background */}
         <svg className="w-48 h-48 transform -rotate-90 absolute">
           <circle
             cx="96"
@@ -43,11 +60,11 @@ const ProfileCard = ({ data, isLoading }) => {
             className="transition-all duration-1000"
           />
         </svg>
-        {/* Profile image */}
+
         <div className="absolute inset-2 rounded-full overflow-hidden bg-white flex items-center justify-center">
-          {data?.user?.imgUrl ? (
+          {data?.data?.user?.imgUrl ? (
             <img
-              src={data.user.imgUrl}
+              src={data.data.user.imgUrl}
               alt="Profile"
               className="w-full h-full rounded-full object-cover"
             />
@@ -56,17 +73,30 @@ const ProfileCard = ({ data, isLoading }) => {
           )}
         </div>
       </div>
+      <div className=" pb-4">
+        <p className="text-gray-800 text-xl font-semibold mt-4">
+          {data?.data?.user?.firstName} {data?.data?.user?.lastName}
+        </p>
+      </div>
     </div>
   );
 };
 
 // Profile Info Component
-const ProfileInfo = ({ data, isLoading }) => {
+const ProfileInfo = ({ data, isLoading, onEdit }) => {
   if (isLoading)
     return <div className="bg-gray-200 rounded-lg p-8 h-96 animate-pulse" />;
 
   return (
-    <div className="bg-gray-200 rounded-lg p-8">
+    <div className="bg-gray-200 rounded-lg p-8 group relative">
+      {/* Edit Icon */}
+      <button
+        onClick={onEdit}
+        className="absolute top-4 right-4 hidden group-hover:flex bg-white p-2 rounded-full shadow-md"
+      >
+        ✏️
+      </button>
+
       <h3 className="text-gray-700 font-semibold mb-6">Profile info</h3>
 
       <div className="space-y-6">
@@ -88,13 +118,99 @@ const ProfileInfo = ({ data, isLoading }) => {
             {new Date(data?.data?.user?.dateOfBirth).toLocaleDateString()}
           </p>
         </div>
+      </div>
+    </div>
+  );
+};
 
-        <div>
-          <p className="text-gray-600 text-sm mb-1">Member since</p>
-          <p className="text-gray-800">
-            {new Date(data?.data?.user?.createdAt).toLocaleDateString()}
-          </p>
-        </div>
+const EditProfileModal = ({ isOpen, onClose, user }) => {
+  const [updateProfile] = useUpdateUserMutation();
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      city: user?.city,
+      state: user?.state,
+      phoneNumber: user?.phoneNumber,
+      dateOfBirth: user?.dateOfBirth?.split("T")[0],
+    },
+  });
+
+  const onSubmit = async (formData) => {
+    try {
+      let base64Image = user?.imgUrl;
+
+      if (formData.image && formData.image[0]) {
+        base64Image = await getBase64(formData.image[0]);
+      }
+
+      const res = await updateProfile({
+        city: formData.city,
+        phoneNumber: formData.phoneNumber,
+        dateOfBirth: formData.dateOfBirth,
+        imgUrl: base64Image,
+      });
+
+      if (res.error) return toast.error(res.error.data?.message);
+
+      toast.success("Profile Updated");
+      onClose();
+    } catch (error) {
+      toast.error("Update failed");
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg p-8 w-full max-w-md">
+        <h3 className="text-lg font-semibold mb-6">Edit Profile</h3>
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <input
+            {...register("firstName")}
+            className="w-full border p-2 rounded"
+          />
+          <input
+            {...register("lastName")}
+            className="w-full border p-2 rounded"
+          />
+          <input {...register("city")} className="w-full border p-2 rounded" />
+          <input {...register("state")} className="w-full border p-2 rounded" />
+          <input
+            {...register("phoneNumber")}
+            className="w-full border p-2 rounded"
+          />
+          <input
+            type="date"
+            {...register("dateOfBirth")}
+            className="w-full border p-2 rounded"
+          />
+          <input
+            type="file"
+            accept="image/*"
+            {...register("image")}
+            className="w-full border p-2 rounded"
+          />
+
+          <div className="flex justify-end space-x-4 mt-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2 bg-gray-300 rounded"
+            >
+              Cancel
+            </button>
+
+            <button
+              type="submit"
+              className="px-4 py-2 bg-blue-500 text-white rounded"
+            >
+              Save
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
@@ -104,14 +220,13 @@ const ProfileInfo = ({ data, isLoading }) => {
 const Tabs = ({ data }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   return (
     <div className="bg-gray-200 rounded-lg flex">
       <button
         onClick={() => {
           dispatch(setStep(2));
           navigate(
-            `${data.medical[0]._id ? "/update/medical" : "/signup/form"}`
+            `${data.medical[0]?._id ? "/update/medical" : "/signup/form"}`,
           );
         }}
         className={`flex-1 py-4 text-center font-medium transition-colors text-gray-600 hover:text-gray-900 hover:bg-gray-300`}
@@ -122,7 +237,7 @@ const Tabs = ({ data }) => {
         onClick={() => {
           dispatch(setStep(1));
           navigate(
-            `${data.financial[0]._id ? "/update/profile" : "/signup/form"}`
+            `${data.financial[0]?._id ? "/update/profile" : "/signup/form"}`,
           );
         }}
         className={`flex-1 py-4 text-center font-medium transition-colors text-gray-600 hover:text-gray-900 hover:bg-gray-300`}
@@ -133,7 +248,7 @@ const Tabs = ({ data }) => {
         onClick={() => {
           dispatch(setStep(3));
           navigate(
-            `${data.financial[0]._id ? "/update/financial" : "/signup/form"}`
+            `${data.financial[0]?._id ? "/update/financial" : "/signup/form"}`,
           );
         }}
         className={`flex-1 py-4 text-center font-medium transition-colors text-gray-600 hover:text-gray-900 hover:bg-gray-300`}
@@ -143,7 +258,9 @@ const Tabs = ({ data }) => {
       <button
         onClick={() => {
           dispatch(setStep(4));
-          navigate(`${data.homeauto[0]._id ? "/update/home" : "/signup/form"}`);
+          navigate(
+            `${data.homeauto[0]?._id ? "/update/home" : "/signup/form"}`,
+          );
         }}
         className={`flex-1 py-4 text-center font-medium transition-colors text-gray-600 hover:text-gray-900 hover:bg-gray-300`}
       >
@@ -152,9 +269,8 @@ const Tabs = ({ data }) => {
       <button
         onClick={() => {
           dispatch(setStep(5));
-          console.log(data.socialInfo[0]._id);
           navigate(
-            `${data.socialInfo[0]._id ? "/update/social" : "/signup/form"}`
+            `${data.socialInfo[0]?._id ? "/update/social" : "/signup/form"}`,
           );
         }}
         className={`flex-1 py-4 text-center font-medium transition-colors text-gray-600 hover:text-gray-900 hover:bg-gray-300`}
@@ -225,21 +341,23 @@ const Proxy = () => {
 
 // Main App Component
 const ProfilePage = () => {
-  const { data: profileData, isLoading: profileLoading } = useGetAllQuery();
-  if (profileLoading) {
+  const { data: profileData, isLoading } = useGetAllQuery();
+  const [openModal, setOpenModal] = useState(false);
+
+  if (isLoading) {
     return (
       <div className="w-full mx-auto h-96 mt-40">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
       </div>
     );
   }
-  console.log(profileData);
+
   return (
-    <div className="min-h-screen  p-8">
+    <div className="min-h-screen p-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 gap-6 mb-6">
-          <ProfileCard data={profileData} />
-          <ProfileInfo data={profileData} isLoading={profileLoading} />
+          <ProfileCard data={profileData} onEdit={() => setOpenModal(true)} />
+          <ProfileInfo data={profileData} onEdit={() => setOpenModal(true)} />
         </div>
 
         <Tabs data={profileData?.data} />
@@ -249,6 +367,12 @@ const ProfilePage = () => {
           <Proxy />
         </div>
       </div>
+
+      <EditProfileModal
+        isOpen={openModal}
+        onClose={() => setOpenModal(false)}
+        user={profileData?.data?.user}
+      />
     </div>
   );
 };

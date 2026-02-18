@@ -27,7 +27,7 @@ const SubscriptionPage = () => {
     return "from-blue-400 to-blue-500";
   };
 
-  const getFeatures = (title) => {
+   const getFeatures = (title) => {
     if (title.includes("Free")) {
       return [
         "Basic features",
