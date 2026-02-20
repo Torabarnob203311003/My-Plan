@@ -31,16 +31,13 @@ const SignupPage = () => {
   const onSubmit = async (data) => {
     try {
       const res = await signupUser(data);
-      console.log(res);
+
       // Signup failed
       if (res?.error && !res?.error?.data?.success) {
         return toast.error(res.error.data.message);
       }
+      console.log(res.data);
       if (res.data.success) {
-        toast.success(res.data.message);
-
-        reset({ email: "", password: "" });
-
         // Store token
         localStorage.setItem("accessToken", res.data.data.token);
 
@@ -49,10 +46,11 @@ const SignupPage = () => {
         const { exp, iat, ...rest } = decoded;
 
         // Check admin role
-
+        console.log(res);
         dispatch(storToken(res.data.data.token));
         dispatch(storUserData(rest));
         reset({ email: "", phoneNumber: "", password: "" });
+        toast.success(res.data.message);
         navigate("/signup/form");
       }
       // Signup success
