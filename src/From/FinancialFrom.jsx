@@ -24,61 +24,93 @@ const Step3 = ({ nextStep, prevStep }) => {
         Financial Information
       </h2>
 
-      <input
-        type="text"
-        placeholder="Have a Bank account? (ex: Capital One)"
-        {...register("bankAccount")}
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="bankAccount" className="block text-sm font-medium mb-2">Bank Account</label>
+        <input
+          id="bankAccount"
+          type="text"
+          placeholder="Have a Bank account? (ex: Capital One)"
+          {...register("bankAccount")}
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        type="text"
-        placeholder="Have a Retirement account? (ex: 401K plan)"
-        {...register("retirementAccount")}
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="retirementAccount" className="block text-sm font-medium mb-2">Retirement Account</label>
+        <input
+          id="retirementAccount"
+          type="text"
+          placeholder="Have a Retirement account? (ex: 401K plan)"
+          {...register("retirementAccount")}
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        type="text"
-        placeholder="What are your current Assets?"
-        {...register("assets")}
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="assets" className="block text-sm font-medium mb-2">Current Assets</label>
+        <input
+          id="assets"
+          type="text"
+          placeholder="What are your current Assets?"
+          {...register("assets")}
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        type="text"
-        placeholder="Assets value (ex: <$5,000)"
-        {...register("assetsValue")}
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="assetsValue" className="block text-sm font-medium mb-2">Assets Value</label>
+        <input
+          id="assetsValue"
+          type="text"
+          placeholder="Assets value (ex: <$5,000)"
+          {...register("assetsValue")}
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        type="text"
-        placeholder="Have any Debt?"
-        {...register("hasDebt")}
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="hasDebt" className="block text-sm font-medium mb-2">Have Any Debt?</label>
+        <input
+          id="hasDebt"
+          type="text"
+          placeholder="Have any Debt?"
+          {...register("hasDebt")}
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        type="text"
-        placeholder="Debt details"
-        {...register("debt")}
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="debt" className="block text-sm font-medium mb-2">Debt Details</label>
+        <input
+          id="debt"
+          type="text"
+          placeholder="Debt details"
+          {...register("debt")}
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        type="text"
-        placeholder="Business ownership (ex: Own a business)"
-        {...register("businessOwnership")}
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="businessOwnership" className="block text-sm font-medium mb-2">Business Ownership</label>
+        <input
+          id="businessOwnership"
+          type="text"
+          placeholder="Business ownership (ex: Own a business)"
+          {...register("businessOwnership")}
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        type="text"
-        placeholder="Other financial notes"
-        {...register("otherFinancialInfo")}
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="otherFinancialInfo" className="block text-sm font-medium mb-2">Other Financial Notes</label>
+        <input
+          id="otherFinancialInfo"
+          type="text"
+          placeholder="Other financial notes"
+          {...register("otherFinancialInfo")}
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
       <div className="flex justify-between mt-6">
         <button

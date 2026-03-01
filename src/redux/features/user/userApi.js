@@ -9,6 +9,7 @@ const userApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["User"],
     }),
 
     getUser: builder.query({
@@ -19,6 +20,7 @@ const userApi = baseApi.injectEndpoints({
           params: { searchTerm: id },
         };
       },
+      providesTags: ["User"],
     }),
     getUserGrantors: builder.query({
       query: () => {
@@ -27,6 +29,7 @@ const userApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["User"],
     }),
     getUserGrantorData: builder.query({
       query: (id) => {
@@ -35,6 +38,7 @@ const userApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["User"],
     }),
 
     setProxy: builder.mutation({
@@ -44,6 +48,7 @@ const userApi = baseApi.injectEndpoints({
           method: "POST",
         };
       },
+      invalidatesTags: ["User"],
     }),
 
     blockUser: builder.mutation({
@@ -53,6 +58,7 @@ const userApi = baseApi.injectEndpoints({
           method: "DELETE",
         };
       },
+      invalidatesTags: ["User"],
     }),
 
     getAllUsers: builder.query({
@@ -63,6 +69,7 @@ const userApi = baseApi.injectEndpoints({
           params: query,
         };
       },
+      providesTags: ["User"],
     }),
 
     getPlans: builder.query({
@@ -112,6 +119,7 @@ const userApi = baseApi.injectEndpoints({
           body: data,
         };
       },
+      invalidatesTags: ["User"],
     }),
 
 

@@ -21,61 +21,93 @@ const FinancialUpdateFrom = ({ nextStep, prevStep, existingData }) => {
         Update Financial Information
       </h2>
 
-      <input
-        {...register("bankAccount")}
-        defaultValue={data.bankAccount}
-        placeholder="Have a Bank account? (ex: Capital One)"
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="bankAccount" className="block text-sm font-medium mb-2">Bank Account</label>
+        <input
+          id="bankAccount"
+          {...register("bankAccount")}
+          defaultValue={data.bankAccount}
+          placeholder="Have a Bank account? (ex: Capital One)"
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        {...register("retirementAccount")}
-        defaultValue={data.retirementAccount}
-        placeholder="Have a Retirement account? (ex: 401K plan)"
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="retirementAccount" className="block text-sm font-medium mb-2">Retirement Account</label>
+        <input
+          id="retirementAccount"
+          {...register("retirementAccount")}
+          defaultValue={data.retirementAccount}
+          placeholder="Have a Retirement account? (ex: 401K plan)"
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        {...register("assets")}
-        defaultValue={data.assets}
-        placeholder="What are your current Assets?"
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="assets" className="block text-sm font-medium mb-2">Current Assets</label>
+        <input
+          id="assets"
+          {...register("assets")}
+          defaultValue={data.assets}
+          placeholder="What are your current Assets?"
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        {...register("assetsValue")}
-        defaultValue={data.assetsValue}
-        placeholder="Assets value (ex: <$5,000)"
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="assetsValue" className="block text-sm font-medium mb-2">Assets Value</label>
+        <input
+          id="assetsValue"
+          {...register("assetsValue")}
+          defaultValue={data.assetsValue}
+          placeholder="Assets value (ex: <$5,000)"
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        {...register("hasDebt")}
-        defaultValue={data.hasDebt}
-        placeholder="Have any Debt?"
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="hasDebt" className="block text-sm font-medium mb-2">Have Any Debt?</label>
+        <input
+          id="hasDebt"
+          {...register("hasDebt")}
+          defaultValue={data.hasDebt}
+          placeholder="Have any Debt?"
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        {...register("debt")}
-        defaultValue={data.debt}
-        placeholder="Debt details"
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="debt" className="block text-sm font-medium mb-2">Debt Details</label>
+        <input
+          id="debt"
+          {...register("debt")}
+          defaultValue={data.debt}
+          placeholder="Debt details"
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        {...register("businessOwnership")}
-        defaultValue={data.businessOwnership}
-        placeholder="Business ownership (ex: Own a business)"
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="businessOwnership" className="block text-sm font-medium mb-2">Business Ownership</label>
+        <input
+          id="businessOwnership"
+          {...register("businessOwnership")}
+          defaultValue={data.businessOwnership}
+          placeholder="Business ownership (ex: Own a business)"
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        {...register("otherFinancialInfo")}
-        defaultValue={data.otherFinancialInfo}
-        placeholder="Other financial notes"
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="otherFinancialInfo" className="block text-sm font-medium mb-2">Other Financial Notes</label>
+        <input
+          id="otherFinancialInfo"
+          {...register("otherFinancialInfo")}
+          defaultValue={data.otherFinancialInfo}
+          placeholder="Other financial notes"
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
       <div className="flex justify-between mt-6">
         <button type="button" onClick={prevStep} className="btn-secondary">

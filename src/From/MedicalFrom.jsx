@@ -26,38 +26,54 @@ const Step2 = ({ nextStep, prevStep }) => {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <h2 className="text-xl font-semibold mb-6">Medical Information</h2>
 
-      <input
-        type="text"
-        placeholder="Health Insurance"
-        {...register("healthInsurance", {
-          required: "Health Insurance is required",
-        })}
-        className="w-full px-4 py-3 border rounded-lg"
-      />
-      {errors.healthInsurance && (
-        <p className="text-red-500">{errors.healthInsurance.message}</p>
-      )}
+      <div>
+        <label htmlFor="healthInsurance" className="block text-sm font-medium mb-2">Health Insurance</label>
+        <input
+          id="healthInsurance"
+          type="text"
+          placeholder="Health Insurance"
+          {...register("healthInsurance", {
+            required: "Health Insurance is required",
+          })}
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+        {errors.healthInsurance && (
+          <p className="text-red-500">{errors.healthInsurance.message}</p>
+        )}
+      </div>
 
-      <input
-        type="text"
-        placeholder="Supplemental Insurance"
-        {...register("supplementalInsurance")}
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="supplementalInsurance" className="block text-sm font-medium mb-2">Supplemental Insurance</label>
+        <input
+          id="supplementalInsurance"
+          type="text"
+          placeholder="Supplemental Insurance"
+          {...register("supplementalInsurance")}
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        type="text"
-        placeholder="Medications"
-        {...register("medications")}
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="medications" className="block text-sm font-medium mb-2">Medications</label>
+        <input
+          id="medications"
+          type="text"
+          placeholder="Medications"
+          {...register("medications")}
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        type="text"
-        placeholder="Ailments"
-        {...register("knownAilments")}
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="knownAilments" className="block text-sm font-medium mb-2">Ailments</label>
+        <input
+          id="knownAilments"
+          type="text"
+          placeholder="Ailments"
+          {...register("knownAilments")}
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
       <div className="flex justify-between mt-6">
         <button

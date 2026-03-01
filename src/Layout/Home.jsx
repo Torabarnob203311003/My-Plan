@@ -17,7 +17,6 @@ const getBase64 = (file) => {
     reader.onerror = (error) => reject(error);
   });
 };
-
 const ProfileCard = ({ data, isLoading, onEdit }) => {
   if (isLoading)
     return <div className="bg-gray-200 rounded-lg p-8 h-96 animate-pulse" />;
@@ -54,7 +53,7 @@ const ProfileCard = ({ data, isLoading, onEdit }) => {
               2 *
               Math.PI *
               88 *
-              (1 - (data?.percentages?.completionPercentage || 75) / 100)
+              (1 - (data?.data?.percentages?.totalPercentage || 75) / 100)
             }`}
             strokeLinecap="round"
             className="transition-all duration-1000"
@@ -75,7 +74,7 @@ const ProfileCard = ({ data, isLoading, onEdit }) => {
       </div>
       <div className=" pb-4">
         <p className="text-gray-800 text-xl font-semibold mt-4">
-          {data?.data?.user?.firstName} {data?.data?.user?.lastName}
+          {data?.data?.user?.firstName || "No"} {data?.data?.user?.lastName || "data provided"}
         </p>
       </div>
     </div>
@@ -103,19 +102,25 @@ const ProfileInfo = ({ data, isLoading, onEdit }) => {
         <div className="border-b border-gray-300 pb-4">
           <p className="text-gray-600 text-sm mb-1">City, State</p>
           <p className="text-gray-800">
-            {data?.data?.user?.city}. {data?.data?.user?.state}
+            {data?.data?.user?.city && data?.data?.user?.state
+              ? `${data?.data?.user?.city}. ${data?.data?.user?.state}`
+              : "No data provided"}
           </p>
         </div>
 
         <div className="border-b border-gray-300 pb-4">
           <p className="text-gray-600 text-sm mb-1">Phone</p>
-          <p className="text-gray-800">{data?.data?.user?.phoneNumber}</p>
+          <p className="text-gray-800">
+            {data?.data?.user?.phoneNumber || "No data provided"}
+          </p>
         </div>
 
         <div className="border-b border-gray-300 pb-4">
           <p className="text-gray-600 text-sm mb-1">Date Of Birth</p>
           <p className="text-gray-800">
-            {new Date(data?.data?.user?.dateOfBirth).toLocaleDateString()}
+            {data?.data?.user?.dateOfBirth
+              ? new Date(data?.data?.user?.dateOfBirth).toLocaleDateString()
+              : "No data provided"}
           </p>
         </div>
       </div>
@@ -287,14 +292,20 @@ const Suggestions = ({ suggestions }) => {
     <div className="bg-gray-200 rounded-lg p-8">
       <h3 className="text-gray-700 font-semibold mb-6">Suggestions</h3>
       <div className="space-y-4">
-        {suggestions?.map((suggestion, i) => (
-          <div
-            key={i}
-            className="bg-white rounded-lg p-4 border border-gray-300"
-          >
-            <p className="text-gray-700">{suggestion}</p>
+        {suggestions && suggestions.length > 0 ? (
+          suggestions.map((suggestion, i) => (
+            <div
+              key={i}
+              className="bg-white rounded-lg p-4 border border-gray-300"
+            >
+              <p className="text-gray-700">{suggestion || "No data provided"}</p>
+            </div>
+          ))
+        ) : (
+          <div className="bg-white rounded-lg p-4 border border-gray-300">
+            <p className="text-gray-700">No data provided</p>
           </div>
-        ))}
+        )}
       </div>
     </div>
   );
@@ -330,7 +341,9 @@ const Proxy = () => {
               )}
             </div>
             <div>
-              <p className="text-gray-800 font-medium">{proxy?.email}</p>
+              <p className="text-gray-800 font-medium">
+                {proxy?.email || "No data provided"}
+              </p>
             </div>
           </div>
         ))}

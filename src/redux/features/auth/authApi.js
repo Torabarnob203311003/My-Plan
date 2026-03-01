@@ -10,7 +10,7 @@ const authApi = baseApi.injectEndpoints({
           body: user,
         };
       },
-      invalidatesTags: ["getUser"],
+      invalidatesTags: ["Auth"],
     }),
     login: builder.mutation({
       query: (user) => {
@@ -20,51 +20,38 @@ const authApi = baseApi.injectEndpoints({
           body: user,
         };
       },
-      invalidatesTags: ["getUser"],
+      invalidatesTags: ["Auth"],
     }),
 
     forgetPassword: builder.mutation({
       query: (emailData) => {
         return {
-          url: "auth/dashboard/forget-password",
+          url: "AdminEmail",
           method: "POST",
           body: emailData,
         };
       },
-      invalidatesTags: ["getUser"],
+      invalidatesTags: ["Auth"],
     }),
-
-    resendOTP: builder.mutation({
+    verifyOTP: builder.mutation({
       query: (user) => {
         return {
-          url: "auth/resend-otp",
+          url: "codeverify",
           method: "POST",
           body: user,
         };
       },
-      invalidatesTags: ["getUser"],
+      invalidatesTags: ["Auth"],
     }),
-
     resetPassword: builder.mutation({
       query: (updatedData) => {
         return {
-          url: "auth/dashboard/reset-password",
+          url: `forgetPassword`,
           method: "POST",
           body: updatedData,
         };
       },
-      invalidatesTags: ["getUser"],
-    }),
-
-    changePassword: builder.mutation({
-      query: (authData) => {
-        return {
-          url: "auth/change-password",
-          method: "POST",
-          body: authData,
-        };
-      },
-      invalidatesTags: ["getUser"],
+      invalidatesTags: ["Auth"],
     }),
   }),
 });
@@ -76,4 +63,5 @@ export const {
   useResetPasswordMutation,
   useChangePasswordMutation,
   useSignupMutation,
+  useVerifyOTPMutation
 } = authApi;

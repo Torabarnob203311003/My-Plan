@@ -1,6 +1,6 @@
 import { baseApi } from "@/redux/services/API";
 
-const authApi = baseApi.injectEndpoints({
+const formsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createFinancialData: builder.mutation({
       query: (financeData) => {
@@ -10,7 +10,7 @@ const authApi = baseApi.injectEndpoints({
           body: financeData,
         };
       },
-      invalidatesTags: ["getUser"],
+      invalidatesTags: ["User"],
     }),
     updateFinancialData: builder.mutation({
       query: (financeData) => {
@@ -20,7 +20,7 @@ const authApi = baseApi.injectEndpoints({
           body: financeData,
         };
       },
-      invalidatesTags: ["getUser"],
+      invalidatesTags: ["User"],
     }),
     getFinancial: builder.query({
       query: () => {
@@ -29,7 +29,7 @@ const authApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: ["getUser"],
+      providesTags: ["User"],
     }),
 
     createHomeData: builder.mutation({
@@ -40,7 +40,7 @@ const authApi = baseApi.injectEndpoints({
           body: homeInfo,
         };
       },
-      invalidatesTags: ["getUser"],
+      invalidatesTags: ["User"],
     }),
     updateHomeData: builder.mutation({
       query: (homeData) => {
@@ -50,7 +50,7 @@ const authApi = baseApi.injectEndpoints({
           body: homeData,
         };
       },
-      invalidatesTags: ["getUser"],
+      invalidatesTags: ["User"],
     }),
     getHome: builder.query({
       query: () => {
@@ -59,7 +59,7 @@ const authApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: ["getUser"],
+      providesTags: ["User"],
     }),
 
     createMedicalData: builder.mutation({
@@ -70,7 +70,7 @@ const authApi = baseApi.injectEndpoints({
           body: medicalInfo,
         };
       },
-      invalidatesTags: ["getUser"],
+      invalidatesTags: ["User"],
     }),
     updateMedicalData: builder.mutation({
       query: (medicalData) => {
@@ -80,7 +80,7 @@ const authApi = baseApi.injectEndpoints({
           body: medicalData,
         };
       },
-      invalidatesTags: ["getUser"],
+      invalidatesTags: ["User"],
     }),
     getMedical: builder.query({
       query: () => {
@@ -89,7 +89,7 @@ const authApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: ["getUser"],
+      providesTags: ["User"],
     }),
 
     createSocialData: builder.mutation({
@@ -100,7 +100,7 @@ const authApi = baseApi.injectEndpoints({
           body: socialInfo,
         };
       },
-      invalidatesTags: ["getUser"],
+      invalidatesTags: ["User"],
     }),
     updateSocialData: builder.mutation({
       query: (socialData) => {
@@ -110,7 +110,7 @@ const authApi = baseApi.injectEndpoints({
           body: socialData,
         };
       },
-      invalidatesTags: ["getUser"],
+      invalidatesTags: ["User"],
     }),
     getSocial: builder.query({
       query: () => {
@@ -119,7 +119,7 @@ const authApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: ["getUser"],
+      providesTags: ["User"],
     }),
 
     createProfileData: builder.mutation({
@@ -130,7 +130,7 @@ const authApi = baseApi.injectEndpoints({
           body: profile,
         };
       },
-      invalidatesTags: ["getUser"],
+      invalidatesTags: ["User"],
     }),
     updateProfileData: builder.mutation({
       query: (profileData) => {
@@ -140,7 +140,7 @@ const authApi = baseApi.injectEndpoints({
           body: profileData,
         };
       },
-      invalidatesTags: ["getUser"],
+      invalidatesTags: ["User"],
     }),
     getProfile: builder.query({
       query: () => {
@@ -149,7 +149,7 @@ const authApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: ["getUser"],
+      providesTags: ["User"],
     }),
     getAll: builder.query({
       query: () => {
@@ -158,7 +158,7 @@ const authApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: ["getUser"],
+      providesTags: ["User"],
     }),
   }),
 });
@@ -180,4 +180,4 @@ export const {
   useUpdateProfileDataMutation,
   useGetMedicalQuery,
   useGetAllQuery,
-} = authApi;
+} = formsApi;

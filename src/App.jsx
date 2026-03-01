@@ -25,6 +25,10 @@ import MedicalUpdatePage from "../src/updateFroms/MedicalUpdatePage";
 import GrantorAccount from "./Layout/GrantorAccount";
 import SubscriptionPage from "./Layout/plans";
 import FeedbackModal from "./Layout/Feedback";
+import ForgotPasswordPage from "./Layout/ForgotPasswordPage";
+import VerifyOTPPage from "./Layout/VerifyOTPPage";
+import ResetPasswordPage from "./Layout/ResetPasswordPage";
+
 
 const App = () => {
   return (
@@ -34,7 +38,9 @@ const App = () => {
         {/* Public Routes */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/verify-otp" element={<VerifyOTPPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
         {/* Protected signup continuation */}
         <Route element={<PrivateRoute />}>
           <Route path="/signup/form" element={<Forms />} />

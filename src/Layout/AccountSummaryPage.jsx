@@ -19,13 +19,11 @@ const AccountSummaryPage = () => {
   const { data: userData, isLoading: userLoading } = useGetUserQuery(search);
   const [setProxy, { isLoading: setProxyLoading }] = useSetProxyMutation();
   if (isLoading || setProxyLoading) {
-
     return (
       <div className="w-full mx-auto h-96 mt-40">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
       </div>
     );
-  
   }
 
   const setProxyFunction = async (id) => {
@@ -157,10 +155,15 @@ const AccountSummaryPage = () => {
               {userData?.data?.map((user, index) => (
                 <li
                   key={index}
-                  className="border p-2 rounded cursor-pointer"
-                  onClick={() => setProxyFunction(user._id)}
+                  className="border p-2 rounded flex justify-between items-center"
                 >
                   <p className="text-sm text-gray-600">{user.email}</p>
+                  <button
+                    onClick={() => setProxyFunction(user._id)}
+                    className="text-xs bg-blue-500 text-white px-2 py-1 rounded"
+                  >
+                    Select
+                  </button>
                 </li>
               ))}
 

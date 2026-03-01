@@ -28,41 +28,61 @@ const SocialInfoUpdate = ({ prevStep, handleSaveAll, existingData }) => {
         Update Social Information
       </h2>
 
-      <input
-        {...register("streamingService")}
-        defaultValue={data.streamingService}
-        placeholder="Subscribed to a Streaming service?"
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="streamingService" className="block text-sm font-medium mb-2">Streaming Service</label>
+        <input
+          id="streamingService"
+          {...register("streamingService")}
+          defaultValue={data.streamingService}
+          placeholder="Subscribed to a Streaming service?"
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        {...register("website")}
-        defaultValue={data.website}
-        placeholder="Have a Website?"
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="website" className="block text-sm font-medium mb-2">Website</label>
+        <input
+          id="website"
+          {...register("website")}
+          defaultValue={data.website}
+          placeholder="Have a Website?"
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        {...register("socialMedia")}
-        defaultValue={data.socialMedia}
-        placeholder="Have Social media?"
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="socialMedia" className="block text-sm font-medium mb-2">Social Media</label>
+        <input
+          id="socialMedia"
+          {...register("socialMedia")}
+          defaultValue={data.socialMedia}
+          placeholder="Have Social media?"
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
       {/* Duplicate UI fields */}
-      <input
-        {...register("streamingServiceDuplicate")}
-        defaultValue={data.streamingServiceDuplicate}
-        placeholder="Subscribed to a Streaming service?"
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="streamingServiceDuplicate" className="block text-sm font-medium mb-2">Streaming Service (2)</label>
+        <input
+          id="streamingServiceDuplicate"
+          {...register("streamingServiceDuplicate")}
+          defaultValue={data.streamingServiceDuplicate}
+          placeholder="Subscribed to a Streaming service?"
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
-      <input
-        {...register("websiteDuplicate")}
-        defaultValue={data.websiteDuplicate}
-        placeholder="Have a Website?"
-        className="w-full px-4 py-3 border rounded-lg"
-      />
+      <div>
+        <label htmlFor="websiteDuplicate" className="block text-sm font-medium mb-2">Website (2)</label>
+        <input
+          id="websiteDuplicate"
+          {...register("websiteDuplicate")}
+          defaultValue={data.websiteDuplicate}
+          placeholder="Have a Website?"
+          className="w-full px-4 py-3 border rounded-lg"
+        />
+      </div>
 
       <div className="flex justify-between mt-6">
         <button type="button" onClick={prevStep} className="btn-secondary">

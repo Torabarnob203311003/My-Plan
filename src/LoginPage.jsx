@@ -102,7 +102,25 @@ const LoginPage = () => {
             {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
+        <div className="flex items-center justify-between mt-5">
+          <label className="flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              {...register("rememberMe")}
+              className="w-4 h-4 rounded border-gray-300"
+              style={{ accentColor: "#2E6AA7" }}
+            />
+            <span className="ml-2 text-sm text-gray-600">Remember me</span>
+          </label>
 
+          <button
+            type="button"
+            onClick={() => navigate("/forgot-password")}
+            className="text-sm text-sky-700 hover:text-sky-900 font-medium transition"
+          >
+            Forgot Password?
+          </button>
+        </div>
         <p className="mt-4 text-sm">
           Don’t have an account?{" "}
           <Link to="/signup" className="text-[#2E6AA7] hover:underline">
