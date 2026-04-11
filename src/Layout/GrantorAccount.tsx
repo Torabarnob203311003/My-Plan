@@ -25,7 +25,6 @@ const GrantorAccount = () => {
       </div>
     );
   }
-  console.log(data.data);
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Welcome Banner */}

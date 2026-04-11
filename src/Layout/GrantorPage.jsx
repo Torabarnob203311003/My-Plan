@@ -11,7 +11,6 @@ const GrantorSuggestionsPage = () => {
       </div>
     );
   }
-  console.log(data)
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Welcome Banner */}

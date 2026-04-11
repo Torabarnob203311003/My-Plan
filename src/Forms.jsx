@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useNavigate, Link } from "react-router-dom";
 import Step1 from "./From/ProfileFrom";
 import Step2 from "./From/MedicalFrom";
@@ -16,7 +17,6 @@ const Forms = () => {
   const prevStep = () => dispatch(setStep(Math.max(step - 1, 1)));
 
   const handleSaveAll = (allData) => {
-    console.log("All form data:", allData);
     navigate("/app/plans"); // Navigate after last step
   };
 

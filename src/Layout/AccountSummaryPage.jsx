@@ -65,7 +65,6 @@ const AccountSummaryPage = () => {
       toast.error("Process Failed");
     }
   };
-  console.log(userData);
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Welcome Banner */}

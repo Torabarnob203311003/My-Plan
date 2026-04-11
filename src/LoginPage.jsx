@@ -33,7 +33,6 @@ const LoginPage = () => {
   const onSubmit = async (data) => {
     try {
       const res = await loginUser(data);
-      console.log(res);
       // If login failed
       if (res?.error && !res?.error?.data?.success) {
         return toast.error(res.error.data.message);
