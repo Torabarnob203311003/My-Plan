@@ -3,11 +3,11 @@ import { useGetAllQuery } from "../redux/features/forms/formsApi";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetProxyQuery } from "../redux/features/user/userApi";
 import { useNavigate } from "react-router-dom";
-import { setStep } from "../redux/features/user/userSlice";
+import { setName, setStep } from "../redux/features/user/userSlice";
 import { useUpdateUserMutation } from "../redux/features/user/userApi";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const getBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -74,7 +74,8 @@ const ProfileCard = ({ data, isLoading, onEdit }) => {
       </div>
       <div className=" pb-4">
         <p className="text-gray-800 text-xl font-semibold mt-4">
-          {data?.data?.user?.firstName || "No"} {data?.data?.user?.lastName || "data provided"}
+          {data?.data?.user?.firstName || "No"}{" "}
+          {data?.data?.user?.lastName || "data provided"}
         </p>
       </div>
     </div>
@@ -173,31 +174,100 @@ const EditProfileModal = ({ isOpen, onClose, user }) => {
         <h3 className="text-lg font-semibold mb-6">Edit Profile</h3>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <input
-            {...register("firstName")}
-            className="w-full border p-2 rounded"
-          />
-          <input
-            {...register("lastName")}
-            className="w-full border p-2 rounded"
-          />
-          <input {...register("city")} className="w-full border p-2 rounded" />
-          <input {...register("state")} className="w-full border p-2 rounded" />
-          <input
-            {...register("phoneNumber")}
-            className="w-full border p-2 rounded"
-          />
-          <input
-            type="date"
-            {...register("dateOfBirth")}
-            className="w-full border p-2 rounded"
-          />
-          <input
-            type="file"
-            accept="image/*"
-            {...register("image")}
-            className="w-full border p-2 rounded"
-          />
+          <div>
+            <label
+              htmlFor="firstName"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              First Name
+            </label>
+            <input
+              id="firstName"
+              {...register("firstName")}
+              className="w-full border p-2 rounded"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="lastName"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Last Name
+            </label>
+            <input
+              id="lastName"
+              {...register("lastName")}
+              className="w-full border p-2 rounded"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="city"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              City
+            </label>
+            <input
+              id="city"
+              {...register("city")}
+              className="w-full border p-2 rounded"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="state"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              State
+            </label>
+            <input
+              id="state"
+              {...register("state")}
+              className="w-full border p-2 rounded"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="phoneNumber"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Phone Number
+            </label>
+            <input
+              id="phoneNumber"
+              {...register("phoneNumber")}
+              className="w-full border p-2 rounded"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="dateOfBirth"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Date of Birth
+            </label>
+            <input
+              id="dateOfBirth"
+              type="date"
+              {...register("dateOfBirth")}
+              className="w-full border p-2 rounded"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="image"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
+              Profile Image
+            </label>
+            <input
+              id="image"
+              type="file"
+              accept="image/*"
+              {...register("image")}
+              className="w-full border p-2 rounded"
+            />
+          </div>
 
           <div className="flex justify-end space-x-4 mt-4">
             <button
@@ -298,7 +368,9 @@ const Suggestions = ({ suggestions }) => {
               key={i}
               className="bg-white rounded-lg p-4 border border-gray-300"
             >
-              <p className="text-gray-700">{suggestion || "No data provided"}</p>
+              <p className="text-gray-700">
+                {suggestion || "No data provided"}
+              </p>
             </div>
           ))
         ) : (
@@ -314,7 +386,7 @@ const Suggestions = ({ suggestions }) => {
 // Proxy Component
 const Proxy = () => {
   const userid = useSelector((state) => state.auth.user.userId);
-  const { data, isLoading } = useGetProxyQuery(userid);
+  const { data, isLoading } = useGetProxyQuery(undefined);
   if (isLoading) {
     return (
       <div className="w-full mx-auto h-96 mt-40">
@@ -341,8 +413,12 @@ const Proxy = () => {
               )}
             </div>
             <div>
+              <p className="text-gray-800 font-medium">{proxy?.firstName? proxy?.firstName : proxy?.lastName ? proxy?.lastName : ''}</p>
               <p className="text-gray-800 font-medium">
                 {proxy?.email || "No data provided"}
+              </p>
+              <p className="text-gray-800 font-medium">
+                {proxy?.phoneNumber || "No data provided"}
               </p>
             </div>
           </div>
@@ -356,7 +432,14 @@ const Proxy = () => {
 const ProfilePage = () => {
   const { data: profileData, isLoading } = useGetAllQuery();
   const [openModal, setOpenModal] = useState(false);
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      setName(
+        `${profileData?.data?.user?.firstName || ""} ${profileData?.data?.user?.lastName || ""}`,
+      ),
+    );
+  }, []);
   if (isLoading) {
     return (
       <div className="w-full mx-auto h-96 mt-40">

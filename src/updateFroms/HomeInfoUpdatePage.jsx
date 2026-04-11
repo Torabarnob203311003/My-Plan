@@ -8,7 +8,7 @@ const HomeInfoUpdatePage = () => {
   const navigate = useNavigate();
   const { data: home,isLoading} = useGetHomeQuery();
 
-  const handleNext = () => navigate("/");
+  const handleNext = () => navigate("/app/account");
   const handleBack = () => navigate(-1);
   if (isLoading) {
     return (

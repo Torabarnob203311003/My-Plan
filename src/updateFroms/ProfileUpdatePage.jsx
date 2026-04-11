@@ -8,7 +8,7 @@ const ProfileUpdatePage = () => {
   const navigate = useNavigate();
   const { data: profile,isLoading } = useGetProfileQuery();
 
-  const handleNext = () => navigate("/");
+  const handleNext = () => navigate("/app/account");
   if (isLoading) {
     return (
       <div className="w-full mx-auto h-96 mt-40">

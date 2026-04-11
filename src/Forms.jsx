@@ -17,7 +17,7 @@ const Forms = () => {
 
   const handleSaveAll = (allData) => {
     console.log("All form data:", allData);
-    navigate("/"); // Navigate after last step
+    navigate("/app/plans"); // Navigate after last step
   };
 
   return (
@@ -37,7 +37,7 @@ const Forms = () => {
       {/* Header */}
       <div className="w-full max-w-2xl flex items-center justify-between mb-4">
         <Link
-          to="/"
+          to="/app/home"
           className="text-[#4A90E2] hover:text-[#2E6AA7] font-semibold flex items-center"
         >
           <span className="mr-2">←</span> Back Home

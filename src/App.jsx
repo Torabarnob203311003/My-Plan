@@ -1,6 +1,11 @@
 // App.jsx
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import LoginPage from "./LoginPage";
 import SignupPage from "./SignupPage";
@@ -28,43 +33,43 @@ import FeedbackModal from "./Layout/Feedback";
 import ForgotPasswordPage from "./Layout/ForgotPasswordPage";
 import VerifyOTPPage from "./Layout/VerifyOTPPage";
 import ResetPasswordPage from "./Layout/ResetPasswordPage";
-
+import LandingPage from "./Layout/LandingPage";
 
 const App = () => {
   return (
     <Router>
       <FeedbackModal />
       <Routes>
+        <Route path="/" element={<Navigate to="/app/home" replace />} />
+
         {/* Public Routes */}
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/verify-otp" element={<VerifyOTPPage />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
-        {/* Protected signup continuation */}
-        <Route element={<PrivateRoute />}>
-          <Route path="/signup/form" element={<Forms />} />
-        </Route>
-        <Route element={<PrivateRoute />}>
-          <Route path="/update/social" element={<SocialInfoUpdatePage />} />
-        </Route>
-        <Route element={<PrivateRoute />}>
-          <Route path="/update/home" element={<HomeInfoUpdatePage />} />
-        </Route>
-        <Route element={<PrivateRoute />}>
-          <Route path="/update/financial" element={<FinancialUpdatePage />} />
-        </Route>
-        <Route element={<PrivateRoute />}>
-          <Route path="/update/medical" element={<MedicalUpdatePage />} />
-        </Route>
-        <Route element={<PrivateRoute />}>
-          <Route path="/update/profile" element={<ProfileUpdatePage />} />
+        <Route path="/" element={<Layout />}>
+          <Route path="landing" element={<LandingPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="signup" element={<SignupPage />} />
+          <Route path="forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="verify-otp" element={<VerifyOTPPage />} />
+          <Route path="reset-password" element={<ResetPasswordPage />} />
         </Route>
 
-        {/* Layout + Protected Nested Routes */}
+        {/* Protected signup continuation */}
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
+          <Route path="signup/form" element={<Forms />} />
+        </Route>
+
+        {/* Protected update routes */}
+        <Route element={<PrivateRoute />}>
+          <Route path="update/social" element={<SocialInfoUpdatePage />} />
+          <Route path="update/home" element={<HomeInfoUpdatePage />} />
+          <Route path="update/financial" element={<FinancialUpdatePage />} />
+          <Route path="update/medical" element={<MedicalUpdatePage />} />
+          <Route path="update/profile" element={<ProfileUpdatePage />} />
+        </Route>
+
+        {/* Protected App Routes */}
+        <Route element={<PrivateRoute />}>
+          <Route path="app" element={<Layout />}>
+            <Route index element={<Navigate to="home" replace />} />
             <Route path="home" element={<Home />} />
             <Route path="about" element={<AboutUs />} />
             <Route path="reviews" element={<Reviews />} />

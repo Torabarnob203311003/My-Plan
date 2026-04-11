@@ -28,7 +28,7 @@ const GrantorSuggestionsPage = () => {
           {/* Primary Proxy Card */}
           {data?.data?.map((grantor, i) => (
             <div
-            onClick={()=>navigate(`/grantor/${grantor._id}`)}
+            onClick={()=>navigate(`/app/grantor/${grantor._id}`)}
               key={i}
               className="bg-white rounded-2xl border-2 border-gray-300 p-6 flex items-start space-x-4 cursor-pointer"
             >

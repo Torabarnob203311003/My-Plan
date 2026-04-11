@@ -11,7 +11,6 @@ const ProfileUpdateFrom = ({ nextStep, existingData }) => {
   useEffect(() => {
     if (existingData.data) reset(existingData.data);
   }, [existingData.data, reset]);
-
   const onSubmit = async (data) => {
     const res = await updateStep1(data);
     if (res.error) return toast.error(res.error.data?.message);

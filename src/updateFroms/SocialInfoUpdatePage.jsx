@@ -7,7 +7,7 @@ const SocialInfoUpdatePage = () => {
   const navigate = useNavigate();
   const { data: social, isLoading } = useGetSocialQuery();
 
-  const handleSaveAll = () => navigate("/");
+  const handleSaveAll = () => navigate("/app/account");
   const handleBack = () => navigate(-1);
   if (isLoading) {
     return (

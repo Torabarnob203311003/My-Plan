@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { jwtDecode } from "jwt-decode";
@@ -11,6 +11,7 @@ import { useSignupMutation } from "@/redux/features/auth/authApi";
 
 // Redux
 import { storToken, storUserData } from "@/redux/features/auth/authSlice";
+import { Eye, EyeClosed } from "lucide-react";
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ const SignupPage = () => {
 
   // RTK Query Signup API
   const [signupUser, { isLoading }] = useSignupMutation();
+
+  const [showPassword, setShowPassword] = useState(false);
 
   // React Hook Form
   const {
@@ -96,12 +99,22 @@ const SignupPage = () => {
             </p>
           )}
 
-          <input
-            type="password"
-            placeholder="Password"
-            {...register("password", { required: "Password is required" })}
-            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E6AA7]"
-          />
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              {...register("password", { required: "Password is required" })}
+              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E6AA7]"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-gray-600 hover:text-gray-900 focus:outline-none"
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {!showPassword ? <Eye></Eye> : <EyeClosed></EyeClosed>}
+            </button>
+          </div>
           {errors.password && (
             <p className="text-red-500 text-sm text-left">
               {errors.password.message}
@@ -119,7 +132,7 @@ const SignupPage = () => {
 
         <p className="mt-4 text-sm">
           Already a Member?{" "}
-          <Link to="/" className="text-[#2E6AA7] hover:underline">
+          <Link to="/login" className="text-[#2E6AA7] hover:underline">
             Login here
           </Link>
         </p>

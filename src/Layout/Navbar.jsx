@@ -9,6 +9,8 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const token = useSelector((state) => state.auth.token);
+  const userName = useSelector((state) => state.user.userName); // Access user data
+
   const dispatch = useDispatch();
   return (
     <nav
@@ -40,7 +42,7 @@ const Navbar = () => {
                 </svg>
               </div>
               <Link
-                to="/"
+                to={token ? "/app/home" : "/"}
                 className="text-2xl sm:text-3xl font-bold text-[#4A90E2]"
               >
                 planeer
@@ -52,19 +54,19 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             <div className="hidden md:flex items-center space-x-6 lg:space-x-8  md:me-28  lg:me-16">
               <Link
-                to="about"
+                to="/app/about"
                 className="text-gray-700 hover:text-[#4A90E2] font-medium text-sm lg:text-base transition-colors duration-200"
               >
                 About
               </Link>
               <Link
-                to="reviews"
+                to="/app/reviews"
                 className="text-gray-700 hover:text-[#4A90E2] font-medium text-sm lg:text-base transition-colors duration-200"
               >
                 Reviews
               </Link>
               <Link
-                to="plans"
+                to="/app/plans"
                 className="text-gray-700 hover:text-[#4A90E2] font-medium text-sm lg:text-base transition-colors duration-200"
               >
                 Plans
@@ -76,22 +78,22 @@ const Navbar = () => {
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   className="flex items-center space-x-2 bg-black text-white px-4 py-2 rounded-full"
                 >
-                  <span>Name</span>
+                  <span>{userName || 'User'}</span>
                   <ChevronDown size={16} />
                 </button>
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
                     <a
-                      href="/grantor"
+                      href="/app/grantor"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
-                      Grantor
+                      Status
                     </a>
                     <a
-                      href="/account"
+                      href="/app/account"
                       className="block px-4 py-2 text-gray-800 hover:bg-gray-100"
                     >
-                      Account
+                      Settings
                     </a>
                     <hr className="my-2" />
                     <button

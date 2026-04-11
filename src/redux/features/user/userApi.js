@@ -3,14 +3,16 @@ import { baseApi } from "@/redux/services/API";
 const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getProxy: builder.query({
-      query: (userId) => {
+      query: () => {
         return {
-          url: "getAllProxyset/" + userId,
+          url: "my-proxy-users",
           method: "GET",
         };
       },
       providesTags: ["User"],
     }),
+
+
 
     getUser: builder.query({
       query: (id) => {
@@ -42,20 +44,22 @@ const userApi = baseApi.injectEndpoints({
     }),
 
     setProxy: builder.mutation({
-      query: (id) => {
+      query: (id, index) => {
         return {
-          url: `proxyset/${id}`,
+          url: `proxy/create`,
           method: "POST",
+          body: { index, userId: id },
         };
       },
       invalidatesTags: ["User"],
     }),
 
-    blockUser: builder.mutation({
+    deleteProxy: builder.mutation({
       query: (id) => {
         return {
-          url: `users/block/${id}`,
+          url: `remove`,
           method: "DELETE",
+          body: { proxyId: id },
         };
       },
       invalidatesTags: ["User"],
@@ -99,7 +103,6 @@ const userApi = baseApi.injectEndpoints({
       },
     }),
 
-
     sendReview: builder.mutation({
       query: (body) => {
         return {
@@ -109,7 +112,6 @@ const userApi = baseApi.injectEndpoints({
         };
       },
     }),
-
 
     updateUser: builder.mutation({
       query: (data) => {
@@ -121,8 +123,6 @@ const userApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["User"],
     }),
-
-
   }),
 });
 
@@ -135,7 +135,7 @@ export const {
 
   useGetProxyQuery,
   useGetAllUsersQuery,
-  useBlockUserMutation,
+  useDeleteProxyMutation,
   useSetProxyMutation,
   useGetUserQuery,
   useGetAdminStatsQuery,

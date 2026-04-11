@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Trash2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import {
+  useDeleteProxyMutation,
   useGetProxyQuery,
   useGetUserQuery,
   useSetProxyMutation,
@@ -15,9 +16,11 @@ const AccountSummaryPage = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
   const userid = useSelector((state) => state.auth.user.userId);
-  const { data, isLoading } = useGetProxyQuery(userid);
+  const { data, isLoading } = useGetProxyQuery(undefined);
   const { data: userData, isLoading: userLoading } = useGetUserQuery(search);
   const [setProxy, { isLoading: setProxyLoading }] = useSetProxyMutation();
+  const [deleteProxy, { isLoading: deleteProxyLoading }] =
+    useDeleteProxyMutation();
   if (isLoading || setProxyLoading) {
     return (
       <div className="w-full mx-auto h-96 mt-40">
@@ -26,9 +29,9 @@ const AccountSummaryPage = () => {
     );
   }
 
-  const setProxyFunction = async (id) => {
+  const setProxyFunction = async (id, index) => {
     try {
-      const res = await setProxy(id);
+      const res = await setProxy(id, index);
 
       // If login failed
       if (res?.error && !res?.error?.data?.success) {
@@ -44,7 +47,25 @@ const AccountSummaryPage = () => {
       toast.error("Process Failed");
     }
   };
+  const deleteProxyFunction = async (id, index) => {
+    try {
+      const res = await deleteProxy(id);
 
+      // If login failed
+      if (res?.error && !res?.error?.data?.success) {
+        return toast.error(res.error.data.message);
+      }
+
+      // If login successful
+      if (res.data.success) {
+        toast.success(res.data.message);
+        setIsOpen(false);
+      }
+    } catch (err) {
+      toast.error("Process Failed");
+    }
+  };
+  console.log(userData);
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Welcome Banner */}
@@ -74,12 +95,35 @@ const AccountSummaryPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {/* Primary Proxy Card */}
           {data?.data?.proxysetDetails.map((proxy) => (
-            <div className="bg-white rounded-2xl border-2 border-gray-300 p-6 flex items-start space-x-4">
-              <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-                <span className="text-sm font-semibold">👤</span>
+            <div className="bg-white rounded-2xl border-2 border-gray-300 p-6 flex items-center justify-between space-x-4 flex-1">
+              <div className="flex items-start space-x-4">
+                <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
+                  {proxy?.imgUrl ? (
+                    <img
+                      src={proxy.imgUrl}
+                      alt="Profile"
+                      className="w-full h-full rounded-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-sm font-semibold">👤</span>
+                  )}
+                </div>
+                <div>
+                  <p className="text-gray-800 font-medium">{proxy?.firstName? proxy?.firstName : proxy?.lastName ? proxy?.lastName : ''}</p>
+                  <p className="text-gray-800 font-medium">{proxy?.email}</p>
+                  <p className="text-gray-800 font-medium">
+                    {proxy?.phoneNumber}
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-gray-800 font-medium">{proxy?.email}</p>
+
+              <div className="flex items-center justify-end">
+                <button
+                  onClick={() => deleteProxyFunction(proxy.id)}
+                  className="text-red-500"
+                >
+                  <Trash2 />
+                </button>
               </div>
             </div>
           ))}
@@ -140,7 +184,7 @@ const AccountSummaryPage = () => {
       </div>
       {isOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg w-80">
+          <div className="bg-white p-6 rounded-lg w-96 lg:w-[560px]">
             <h2 className="text-lg font-semibold mb-3">Search User</h2>
 
             <input
@@ -154,16 +198,33 @@ const AccountSummaryPage = () => {
             <ul className="space-y-2">
               {userData?.data?.map((user, index) => (
                 <li
-                  key={index}
-                  className="border p-2 rounded flex justify-between items-center"
+                  key={user._id || index}
+                  className="border p-3 rounded flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center"
                 >
-                  <p className="text-sm text-gray-600">{user.email}</p>
-                  <button
-                    onClick={() => setProxyFunction(user._id)}
-                    className="text-xs bg-blue-500 text-white px-2 py-1 rounded"
-                  >
-                    Select
-                  </button>
+                  <div>
+                    <p className="text-sm font-semibold text-gray-800">
+                      {[user.firstName, user.lastName]
+                        .filter(Boolean)
+                        .join(" ") || "Unnamed User"}
+                    </p>
+                    <p className="text-sm text-gray-600 break-all">
+                      {user.email}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => setProxyFunction(user._id, 0)}
+                      className="text-xs bg-green-500 text-white px-2 py-1 rounded"
+                    >
+                      Primary Proxy
+                    </button>
+                    <button
+                      onClick={() => setProxyFunction(user._id, 1)}
+                      className="text-xs bg-blue-500 text-white px-2 py-1 rounded"
+                    >
+                      secondary Proxy
+                    </button>
+                  </div>
                 </li>
               ))}
 

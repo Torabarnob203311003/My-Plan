@@ -1,6 +1,7 @@
 import React from 'react';
 
 const HeroSection = () => {
+
   return (
     <div style={{ backgroundColor: '#83b9f0'}} className="w-full -mt-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">

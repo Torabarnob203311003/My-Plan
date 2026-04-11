@@ -37,17 +37,17 @@ export default function PlannerFooter() {
             <h3 className="text-lg font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/about" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
+                <Link to="/app/about" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/faq" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
+                <Link to="/app/faq" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link to="/message-center" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
+                <Link to="/app/message-center" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
                   Contact Us
                 </Link>
               </li>
@@ -59,12 +59,12 @@ export default function PlannerFooter() {
             <h3 className="text-lg font-semibold mb-4">Support</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/customer-service" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
+                <Link to="/app/customer-service" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
                   Help Center
                 </Link>
               </li>
               <li>
-                <Link to="/message-center" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
+                <Link to="/app/message-center" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
                   Support
                 </Link>
               </li>
@@ -76,7 +76,7 @@ export default function PlannerFooter() {
             <h3 className="text-lg font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/terms" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
+                <Link to="/app/terms" className="text-sm text-white/90 hover:text-white hover:underline transition-all">
                   Terms of Conditions
                 </Link>
               </li>

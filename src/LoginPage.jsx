@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 // LoginPage.jsx
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { jwtDecode } from "jwt-decode";
@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { useLoginMutation } from "./redux/features/auth/authApi";
 import { storToken, storUserData } from "./redux/features/auth/authSlice";
 import { toast } from "sonner";
+import { Eye, EyeClosed } from "lucide-react";
 
 // Redux
 
@@ -25,6 +26,8 @@ const LoginPage = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+  const [showPassword, setShowPassword] = useState(false);
 
   // Handle API Login
   const onSubmit = async (data) => {
@@ -49,11 +52,11 @@ const LoginPage = () => {
         const decoded = jwtDecode(res.data.data.token);
         const { exp, iat, ...rest } = decoded;
         // Check admin role
-
+        
         dispatch(storToken(res.data.data.token));
         dispatch(storUserData(rest));
 
-        navigate("/");
+        navigate("/app/home");
       }
     } catch (err) {
       toast.error("Login Failed");
@@ -82,12 +85,22 @@ const LoginPage = () => {
             </p>
           )}
 
-          <input
-            type="password"
-            placeholder="Password"
-            {...register("password", { required: "Password is required" })}
-            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E6AA7]"
-          />
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              {...register("password", { required: "Password is required" })}
+              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2E6AA7]"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-sm text-gray-600 hover:text-gray-900 focus:outline-none"
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {!showPassword ? <Eye></Eye> : <EyeClosed></EyeClosed>}
+            </button>
+          </div>
           {errors.password && (
             <p className="text-red-500 text-sm text-left">
               {errors.password.message}

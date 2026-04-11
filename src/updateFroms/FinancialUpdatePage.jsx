@@ -7,7 +7,7 @@ import { useGetFinancialQuery } from "../redux/features/forms/formsApi";
 const FinancialUpdatePage = () => {
   const navigate = useNavigate();
   const { data: financial, isLoading } = useGetFinancialQuery();
-  const handleNext = () => navigate("/");
+  const handleNext = () => navigate("/app/account");
   const handleBack = () => navigate(-1);
   if (isLoading) {
     return (
