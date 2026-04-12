@@ -6,6 +6,7 @@ const initialState = {
   collapsed: false,
   loading: false,
   otpEmail: null,
+  userName: null,
   otp: null,
 };
 
@@ -36,6 +37,9 @@ export const authSlice = createSlice({
     setOTP: (state, actions) => {
       state.otp = actions.payload;
     },
+    setName: (state, action) => {
+      state.userName = action.payload;
+    },
   },
 });
 
@@ -47,6 +51,7 @@ export const {
   logOut,
   setOtpEmail,
   setOTP,
+   setName,
 } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -30,8 +30,9 @@ const AccountSummaryPage = () => {
   }
 
   const setProxyFunction = async (id, index) => {
+    console.log(id)
     try {
-      const res = await setProxy(id, index);
+      const res = await setProxy({proxysetId:id, index});
 
       // If login failed
       if (res?.error && !res?.error?.data?.success) {
@@ -47,9 +48,9 @@ const AccountSummaryPage = () => {
       toast.error("Process Failed");
     }
   };
-  const deleteProxyFunction = async (id, index) => {
+  const deleteProxyFunction = async (id) => {
     try {
-      const res = await deleteProxy(id);
+      const res = await deleteProxy({ proxyId: id });
 
       // If login failed
       if (res?.error && !res?.error?.data?.success) {
@@ -93,13 +94,13 @@ const AccountSummaryPage = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {/* Primary Proxy Card */}
-          {data?.data?.proxysetDetails.map((proxy) => (
+          {data?.data?.map((proxy) => (
             <div className="bg-white rounded-2xl border-2 border-gray-300 p-6 flex items-center justify-between space-x-4 flex-1">
               <div className="flex items-start space-x-4">
                 <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-                  {proxy?.imgUrl ? (
+                  {proxy?.data?.proxy?.imgUrl ? (
                     <img
-                      src={proxy.imgUrl}
+                      src={proxy?.data?.proxy?.imgUrl}
                       alt="Profile"
                       className="w-full h-full rounded-full object-cover"
                     />
@@ -108,17 +109,17 @@ const AccountSummaryPage = () => {
                   )}
                 </div>
                 <div>
-                  <p className="text-gray-800 font-medium">{proxy?.firstName? proxy?.firstName : proxy?.lastName ? proxy?.lastName : ''}</p>
-                  <p className="text-gray-800 font-medium">{proxy?.email}</p>
+                  <p className="text-gray-800 font-medium">{proxy?.data?.proxy?.firstName? `${proxy?.data?.proxy?.firstName} ${proxy?.data?.proxy?.lastName}` : proxy?.data?.proxy?.lastName ? proxy?.data?.proxy?.lastName : ''}</p>
+                  <p className="text-gray-800 font-medium">{proxy?.data?.proxy?.email}</p>
                   <p className="text-gray-800 font-medium">
-                    {proxy?.phoneNumber}
+                    {proxy?.data?.proxy?.phoneNumber}
                   </p>
                 </div>
               </div>
 
               <div className="flex items-center justify-end">
                 <button
-                  onClick={() => deleteProxyFunction(proxy.id)}
+                  onClick={() => deleteProxyFunction(proxy?.data?._id)}
                   className="text-red-500"
                 >
                   <Trash2 />

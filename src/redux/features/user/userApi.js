@@ -5,7 +5,7 @@ const userApi = baseApi.injectEndpoints({
     getProxy: builder.query({
       query: () => {
         return {
-          url: "my-proxy-users",
+          url: "my-proxyset-users",
           method: "GET",
         };
       },
@@ -44,22 +44,22 @@ const userApi = baseApi.injectEndpoints({
     }),
 
     setProxy: builder.mutation({
-      query: (id, index) => {
+      query: (body) => {
         return {
-          url: `proxy/create`,
+          url: `proxyset`,
           method: "POST",
-          body: { index, userId: id },
+          body,
         };
       },
       invalidatesTags: ["User"],
     }),
 
     deleteProxy: builder.mutation({
-      query: (id) => {
+      query: (body) => {
         return {
           url: `remove`,
           method: "DELETE",
-          body: { proxyId: id },
+          body,
         };
       },
       invalidatesTags: ["User"],

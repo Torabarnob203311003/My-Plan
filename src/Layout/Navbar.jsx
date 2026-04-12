@@ -9,7 +9,7 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const token = useSelector((state) => state.auth.token);
-  const userName = useSelector((state) => state.user.userName); // Access user data
+  const userName = useSelector((state) => state.auth.userName); // Access user data
 
   const dispatch = useDispatch();
   return (

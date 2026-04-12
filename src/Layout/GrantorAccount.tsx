@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import SocialInfoView from "../viewGrantorDataFroms/ViewSocialInfo";
 import FinancialViewFrom from "../viewGrantorDataFroms/ViewFinancialFrom";
@@ -14,10 +14,46 @@ const GrantorAccount = () => {
   const [isModalType, setIsModalType] = useState("");
   const { id } = useParams();
   const { data, isLoading } = useGetUserGrantorDataQuery(id);
+
+  const titleByType = useMemo(() => {
+    switch (isModalType) {
+      case "financial":
+        return "Financial";
+      case "profile":
+        return "Personal Items & Effects";
+      case "medical":
+        return "Medical";
+      case "home":
+        return "Home & Auto";
+      case "social":
+        return "Social Media & Online";
+      default:
+        return "Details";
+    }
+  }, [isModalType]);
+
   const openModal = (type: string) => {
-    setIsOpen(!isOpen);
+    setIsOpen(true);
     setIsModalType(type);
   };
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [isOpen]);
+
   if (isLoading) {
     return (
       <div className="w-full mx-auto h-96 mt-40">
@@ -25,6 +61,8 @@ const GrantorAccount = () => {
       </div>
     );
   }
+
+  const grantorData = data?.data || {};
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Welcome Banner */}
@@ -90,33 +128,72 @@ const GrantorAccount = () => {
         </div>
       </div>
       {isOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg">
-            <h2 className="text-lg font-semibold mb-3"></h2>
+        <div
+          className="fixed inset-0 z-50 bg-black/50 px-4 py-6 sm:px-6"
+          onClick={() => setIsOpen(false)}
+        >
+          <div className="flex min-h-full items-center justify-center">
+            <div
+              className="w-full max-w-3xl max-h-[90vh] overflow-hidden rounded-2xl bg-white shadow-2xl"
+              role="dialog"
+              aria-modal="true"
+              aria-label={titleByType}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="max-h-[90vh] overflow-y-auto p-5 sm:p-6">
+                <div className="mb-4 flex items-start justify-between gap-4">
+                  <h2 className="text-base sm:text-lg font-semibold text-gray-900">
+                    {titleByType}
+                  </h2>
+                  <button
+                    type="button"
+                    onClick={() => setIsOpen(false)}
+                    className="rounded-md px-2 py-1 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                    aria-label="Close"
+                  >
+                    X
+                  </button>
+                </div>
             {isModalType === "social" && (
               <SocialInfoView
-                existingData={data.data.socialInfo[0]}
+                existingData={grantorData?.socialInfo?.[0]}
               ></SocialInfoView>
             )}
             {isModalType === "financial" && (
               <FinancialViewFrom
-                existingData={data.data.financial[0]}
+                existingData={grantorData?.financial?.[0]}
               ></FinancialViewFrom>
+            )}
+            {isModalType === "profile" && (
+              <ProfileViewFrom
+                existingData={
+                  grantorData?.user ??
+                  grantorData?.profile?.[0] ??
+                  grantorData?.profileDetails?.[0] ??
+                  grantorData?.ProfileDetails?.[0] ??
+                  grantorData?.profileInfo?.[0] ??
+                  grantorData?.personal?.[0] ??
+                  grantorData?.user?.[0] ??
+                  {}
+                }
+              ></ProfileViewFrom>
             )}
             {isModalType === "medical" && (
               <MedicalViewFrom
-                existingData={data.data.medical[0]}
+                existingData={grantorData?.medical?.[0]}
               ></MedicalViewFrom>
             )}
             {isModalType === "home" && (
-              <HomeInfoView existingData={data.data.homeauto[0]}></HomeInfoView>
+              <HomeInfoView existingData={grantorData?.homeauto?.[0]}></HomeInfoView>
             )}
             <button
               onClick={() => setIsOpen(false)}
-              className="mt-4 w-full px-4 py-2 bg-gray-300 rounded"
+              className="mt-5 w-full rounded-lg bg-gray-900 px-4 py-3 text-sm font-medium text-white transition hover:bg-gray-800"
             >
               Close
             </button>
+              </div>
+            </div>
           </div>
         </div>
       )}

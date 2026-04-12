@@ -1,47 +1,59 @@
 const MedicalViewFrom = ({ existingData }) => {
+  const data = existingData || {};
   return (
     <form className="space-y-4">
-      <h2 className="text-xl font-semibold mb-6">Update Medical Information</h2>
-
-      <div>
-        <label htmlFor="healthInsurance" className="block text-sm font-medium mb-2">Health Insurance</label>
-        <input
-          id="healthInsurance"
-          disabled
-          defaultValue={existingData.healthInsurance}
-          placeholder="Health Insurance"
-          className="w-full px-4 py-3 border rounded-lg"
-        />
-      </div>
-      <div>
-        <label htmlFor="supplementalInsurance" className="block text-sm font-medium mb-2">Supplemental Insurance</label>
-        <input
-          id="supplementalInsurance"
-          disabled
-          defaultValue={existingData.supplementalInsurance}
-          placeholder="Supplemental Insurance"
-          className="w-full px-4 py-3 border rounded-lg"
-        />
-      </div>
-      <div>
-        <label htmlFor="medications" className="block text-sm font-medium mb-2">Medications</label>
-        <input
-          id="medications"
-          disabled
-          defaultValue={existingData.medications}
-          placeholder="Medications"
-          className="w-full px-4 py-3 border rounded-lg"
-        />
-      </div>
-      <div>
-        <label htmlFor="knownAilments" className="block text-sm font-medium mb-2">Ailments</label>
-        <input
-          id="knownAilments"
-          disabled
-          defaultValue={existingData.knownAilments}
-          placeholder="Ailments"
-          className="w-full px-4 py-3 border rounded-lg"
-        />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label htmlFor="healthInsurance" className="block text-sm font-medium mb-1">
+            Health Insurance
+          </label>
+          <input
+            id="healthInsurance"
+            disabled
+            value={data.healthInsurance ?? ""}
+            placeholder="Health Insurance"
+            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm"
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="supplementalInsurance"
+            className="block text-sm font-medium mb-1"
+          >
+            Supplemental Insurance
+          </label>
+          <input
+            id="supplementalInsurance"
+            disabled
+            value={data.supplementalInsurance ?? ""}
+            placeholder="Supplemental Insurance"
+            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm"
+          />
+        </div>
+        <div>
+          <label htmlFor="medications" className="block text-sm font-medium mb-1">
+            Medications
+          </label>
+          <input
+            id="medications"
+            disabled
+            value={data.medications ?? ""}
+            placeholder="Medications"
+            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm"
+          />
+        </div>
+        <div>
+          <label htmlFor="knownAilments" className="block text-sm font-medium mb-1">
+            Ailments
+          </label>
+          <input
+            id="knownAilments"
+            disabled
+            value={data.knownAilments ?? ""}
+            placeholder="Ailments"
+            className="w-full rounded-lg border border-gray-300 bg-gray-50 px-3 py-2 text-sm"
+          />
+        </div>
       </div>
     </form>
   );

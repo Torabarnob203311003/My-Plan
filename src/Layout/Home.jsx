@@ -3,11 +3,12 @@ import { useGetAllQuery } from "../redux/features/forms/formsApi";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetProxyQuery } from "../redux/features/user/userApi";
 import { useNavigate } from "react-router-dom";
-import { setName, setStep } from "../redux/features/user/userSlice";
+import { setStep } from "../redux/features/user/userSlice";
 import { useUpdateUserMutation } from "../redux/features/user/userApi";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import { setName } from "../redux/features/auth/authSlice";
 
 const getBase64 = (file) => {
   return new Promise((resolve, reject) => {
@@ -394,7 +395,7 @@ const Proxy = () => {
       </div>
     );
   }
-  const proxies = data?.data.proxysetDetails || [];
+  const proxies = data?.data || [];
   return (
     <div className="bg-gray-200 rounded-lg p-8">
       <h3 className="text-gray-700 font-semibold mb-6">Proxy</h3>
@@ -402,9 +403,9 @@ const Proxy = () => {
         {proxies.map((proxy) => (
           <div className="bg-white rounded-2xl border-2 border-gray-300 p-6 flex items-start space-x-4">
             <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center">
-              {proxy.imgUrl ? (
+              {proxy.data?.proxy?.imgUrl ? (
                 <img
-                  src={proxy.imgUrl}
+                  src={proxy.data?.proxy?.imgUrl}
                   alt="Proxy"
                   className="w-full h-full rounded-full object-cover"
                 />
@@ -413,12 +414,9 @@ const Proxy = () => {
               )}
             </div>
             <div>
-              <p className="text-gray-800 font-medium">{proxy?.firstName? proxy?.firstName : proxy?.lastName ? proxy?.lastName : ''}</p>
+               <p className="text-gray-800 font-medium">{proxy?.data?.proxy?.firstName? `${proxy?.data?.proxy?.firstName} ${proxy?.data?.proxy?.lastName}` : proxy?.data?.proxy?.lastName ? proxy?.data?.proxy?.lastName : ''}</p>
               <p className="text-gray-800 font-medium">
-                {proxy?.email || "No data provided"}
-              </p>
-              <p className="text-gray-800 font-medium">
-                {proxy?.phoneNumber || "No data provided"}
+                {proxy?.data?.proxy?.email || "No data provided"}
               </p>
             </div>
           </div>
