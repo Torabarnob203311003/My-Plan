@@ -439,7 +439,7 @@ const ProfilePage = () => {
         `${profileData?.data?.user?.firstName || ""} ${profileData?.data?.user?.lastName || ""}`,
       ),
     );
-  }, []);
+  }, [profileData]);
   if (isLoading) {
     return (
       <div className="w-full mx-auto h-96 mt-40">
